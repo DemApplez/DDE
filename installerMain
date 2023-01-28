@@ -216,5 +216,5 @@ print("Example: Private Messaging In Messaging App")
 sleep(2)
  
 fs.delete("installer")
-fs.delete("InstallerMain")
+fs.delete("installerMain")
 os.reboot()
