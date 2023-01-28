@@ -1,0 +1,117 @@
+term.setCursorPos(1,1)
+term.clear()
+rednet.open("right")
+print("Welcome To Your mIOS Messaging Server. On This Display, There Will Be Words Printed Whenever A Message Is Stored And/Or Sent To Someone.")
+sleep(3)
+print("Checking If usernames Folder Exists...")
+sleep(1)
+if fs.exists("usernames") then
+	print("usernames Folder Exists, Continuing Startup...")
+else
+	print("usernames Folder Does Not Exist!")
+	print("Creating usernames Folder...")
+	fs.makeDir("usernames")
+	print("usernames Folder Created")
+end
+print("Checking If ids Folder Exists...")
+sleep(1)
+if fs.exists("ids") then
+	print("ids Folder Exists, Continuing Startup...")
+else
+	print("ids Folder Does Not Exist!")
+	print("Creating ids Folder...")
+	fs.makeDir("ids")
+	print("ids Folder Created")
+end
+sleep(1)
+print("Beginning Normal Server Protocols")
+
+while true do
+	--Receives Message From Users
+	id, message, messageType = rednet.receive()
+	
+	--If MessageType = 0 Then Accept Message As Global Chat Message
+	if messageType == "0" then
+		print("Received Global Message Attempt From Username: " .. message[2])
+		print("Message: " .. message[1])
+		print("Attempting To Send Message To Global Chat")
+		rednet.broadcast(message)
+		print("Displayed In Global Chat")
+	end
+	
+	--If MessageType = 1 Then Accept Message As Private Message
+	if messageType == "1" then
+		print("Received Private Message Attempt")
+		print("Message: " .. message)
+		print("Attempting To Send Data Back For Private Message")
+		rednet.send()
+		print("Data Sent Successfully")
+	end
+	
+	--If MessageType = 2 Then Return Message To User To Help Them Begin Sign Up
+	if messageType == "2" then
+		write("User On Computer#")
+		write(tostring(id))
+		print(" Wants To Begin Sign Up Process")
+		print("Beginning Sign Up Process")
+		rednet.send(id, "RESPONSE GOOD")
+	end
+	
+	--If MessageType = 3 Then Check Is Username They Picked Is Valid
+	if messageType == "3" then
+		print("Checking If Username " .. message[1] .. " Is Available")
+		
+		--If Username Exists, Send Back Data Saying It Does To Reprompt User
+		--If Username Doesn't Exist, Create Account, Password, And ID Files
+		if fs.exists("usernames/" .. message[1]) then
+			print("Username Already In Use, Prompt New Name")
+			rednet.send(id, "USERNAME EXISTS")
+		else
+			print("Username Does Not Exist")
+			local userfile = fs.open("usernames/" .. message[1], "w")
+			userfile.write(message[2])
+			userfile.close()
+			userfile = fs.open("ids/" .. message[1], "w")
+			userfile.write(id)
+			userfile.close()
+			print("Sign Up Process Complete")
+			print("Sending Data Back To User")
+			rednet.send(id, "SIGNUP COMPLETE")
+		end
+	end
+	
+	--If MessageType = 4 Then Begin Login Of Account
+	if messageType == "4" then
+		print("Computer#" .. id .. " Wants To Login To Account With Username: " .. message[1])
+		print("Attempting Login...")
+		if fs.exists("usernames/" .. message[1]) then
+			local userfile = fs.open("usernames/" .. message[1], "r")
+			local password = userfile.readAll()
+			if message[2] == password then
+				print("Login Successful")
+				rednet.send(id, "LOGIN SUCCESSFUL")
+			else
+				print("Login Failed, Wrong Password")
+				rednet.send(id, "LOGIN FAILED")
+			end
+		else
+			print("Login Failed, No User With That Name Exists")
+			rednet.send(id, "LOGIN FAILED")
+		end
+	end
+	
+	--If MessageType = 5 Then Reset ID For Account
+	if messageType == "5" then
+		print("Computer#" .. id .. " Wants To Reset ID For Account: " .. message[1])
+		print("resetting")
+		fs.delete("ids/" .. message[1])
+		userfile = fs.open("ids/" .. message[1], "w")
+		userfile.write(id)
+		userfile.close()
+	end
+	
+	--If MessageType = 6 Then Kill Server
+	if messageType == "6" then
+		shell.run("back")
+	end
+end
