@@ -1,7 +1,7 @@
 term.setCursorPos(1,1)
 term.clear()
 rednet.open("right")
-print("Welcome To Your mIOS Messaging Server. On This Display, There Will Be Words Printed Whenever A Message Is Stored And/Or Sent To Someone.")
+print("Welcome To Your DDE Messaging Server. On This Display, There Will Be Words Printed Whenever A Message Is Stored And/Or Sent To Someone.")
 sleep(3)
 print("Checking If usernames Folder Exists...")
 sleep(1)
