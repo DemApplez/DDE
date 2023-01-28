@@ -43,4 +43,4 @@ end
 
 sleep(0.2)
 
-shell.run("mIOS/.startupLogo")
+shell.run("DDE/.startupLogo")

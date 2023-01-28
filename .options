@@ -90,21 +90,21 @@ term.clear()
 if nOption == 1 then
 	term.setBackgroundColor(colors.black)
 	term.setTextColor(colors.white)
-    shell.run("mIOS/.backup")
+    shell.run("DDE/.backup")
 elseif nOption == 2 then
 	term.setBackgroundColor(colors.black)
 	term.setTextColor(colors.white)
-    shell.run("mIOS/.updateChecker")
+    shell.run("DDE/.updateChecker")
 elseif nOption == 3 then
 	term.setBackgroundColor(colors.black)
 	term.setTextColor(colors.white)
-    shell.run("mIOS/.uninstall")
+    shell.run("DDE/.uninstall")
 elseif nOption == 4 then
 	term.setBackgroundColor(colors.black)
 	term.setTextColor(colors.white)
-    shell.run("mIOS/.restore")
+    shell.run("DDE/.restore")
 elseif nOption == 5 then
 	term.setBackgroundColor(colors.black)
 	term.setTextColor(colors.white)
-    shell.run("mIOS/.start")
+    shell.run("DDE/.start")
 end

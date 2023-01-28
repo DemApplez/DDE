@@ -120,7 +120,7 @@ if nOption == 1 then
 	print("Beginning Backup Operation To: Built-In Storage")
 	print("")
 	sleep(1.5)
-	beginCopy("mIOS", ".backup/mIOS")
+	beginCopy("DDE", ".backup/DDE")
 	beginCopy("programs", ".backup/programs")
 	beginCopy("startup", ".backup/startup")
 	if fs.exists("appdata") then
@@ -132,7 +132,7 @@ if nOption == 1 then
 
 	print("Completed Backup Operation, Returning To Doors")
 	sleep(1.5)
-	shell.run("mIOS/.start")
+	shell.run("DDE/.start")
 elseif nOption == 2 then
 	term.clear()
 	term.setCursorPos(1,1)
@@ -141,7 +141,7 @@ elseif nOption == 2 then
 	print("")
 	sleep(1.5)
 	if fs.exists("disk") then
-		beginCopy("mIOS", "disk/.backup/mIOS")
+		beginCopy("DDE", "disk/.backup/DDE")
 		beginCopy("programs", "disk/.backup/programs")
 		beginCopy("startup", "disk/.backup/startup")
 		if fs.exists("appdata") then
@@ -159,7 +159,7 @@ elseif nOption == 2 then
 	end
 	print("")
 	sleep(1.5)
-	shell.run("mIOS/.start")
+	shell.run("DDE/.start")
 elseif nOption == 3 then
 	term.clear()
 	term.setCursorPos(1,1)
@@ -179,7 +179,7 @@ elseif nOption == 3 then
 	end
 	print("")
 	sleep(1.5)
-	shell.run("mIOS/.start")
+	shell.run("DDE/.start")
 elseif nOption == 4 then
 	term.clear()
 	term.setCursorPos(1,1)
@@ -198,7 +198,7 @@ elseif nOption == 4 then
 	end
 	print("")
 	sleep(1.5)
-	shell.run("mIOS/.start")
+	shell.run("DDE/.start")
 elseif nOption == 5 then
 	term.clear()
 	term.setCursorPos(1,1)
@@ -221,9 +221,9 @@ elseif nOption == 5 then
 	end
 	print("")
 	sleep(1.5)
-	shell.run("mIOS/.start")
+	shell.run("DDE/.start")
 elseif nOption == 6 then
 	term.setBackgroundColor(colors.black)
 	term.setTextColor(colors.white)
-    shell.run("mIOS/.options")
+    shell.run("DDE/.options")
 end

@@ -37,4 +37,4 @@ print("Development Build Version 0.4")
 
 sleep(2)
 
-shell.run("mIOS/.start")
+shell.run("DDE/.start")

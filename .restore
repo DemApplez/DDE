@@ -20,7 +20,7 @@ local function drawMenuGraphics()
 	term.setTextColor(colors.white)
     term.clear()
     term.setCursorPos(1,1)
-    term.write("mIOS Main Release #0295")
+    term.write("DDE Version 0.4")
     
     term.setCursorPos(w-13,1)
     if nOption == 1 then
@@ -93,7 +93,7 @@ if nOption == 1 then
 	print("")
 	sleep(3)
 	if fs.exists(".backup") then
-		fs.delete("mIOS")
+		fs.delete("DDE")
 		if fs.exists("appdata") then
 			fs.delete("appdata")
 		end
@@ -101,7 +101,7 @@ if nOption == 1 then
 		fs.delete("startup")
 		fs.delete("BACK")
 		
-		fs.copy(".backup/mIOS", "mIOS")
+		fs.copy(".backup/DDE", "DDE")
 		if fs.exists(".backup/appdata") then
 			fs.copy(".backup/appdata", "appdata")
 		end
@@ -119,7 +119,7 @@ if nOption == 1 then
 		sleep(3)
 		print("Returning To Doors")
 		sleep(2)
-		shell.run("mIOS/.start")
+		shell.run("DDE/.start")
 	end
 elseif nOption == 2 then
 	term.setBackgroundColor(colors.black)
@@ -131,7 +131,7 @@ elseif nOption == 2 then
 	print("")
 	sleep(3)
 	if fs.exists("disk/.backup") then
-		fs.delete("mIOS")
+		fs.delete("DDE")
 		if fs.exists("appdata") then
 			fs.delete("appdata")
 		end
@@ -139,7 +139,7 @@ elseif nOption == 2 then
 		fs.delete("startup")
 		fs.delete("BACK")
 		
-		fs.copy("disk/.backup/mIOS", "mIOS")
+		fs.copy("disk/.backup/DDE", "DDE")
 		if fs.exists("disk/.backup/appdata") then
 			fs.copy("disk/.backup/appdata", "appdata")
 		end
@@ -157,11 +157,11 @@ elseif nOption == 2 then
 		sleep(3)
 		print("Returning To Doors")
 		sleep(2)
-		shell.run("mIOS/.start")
+		shell.run("DDE/.start")
 	end
 	
 elseif nOption == 3 then
 	term.setBackgroundColor(colors.black)
 	term.setTextColor(colors.white)
-    shell.run("mIOS/.options")
+    shell.run("DDE/.options")
 end

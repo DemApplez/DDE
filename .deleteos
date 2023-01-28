@@ -1,8 +1,8 @@
 term.clear()
 term.setCursorPos(1,1)
  
-fs.delete("mIOS")
-print("mIOS Folder Deleted")
+fs.delete("DDE")
+print("DDE Folder Deleted")
 fs.delete("startup")
 print("startup Folder Deleted")
 fs.delete("programs")

@@ -88,17 +88,17 @@ term.clear()
 if nOption == 1 then
 	term.setBackgroundColor(colors.black)
 	term.setTextColor(colors.white)
-    shell.run("mIOS/.command")
+    shell.run("DDE/.command")
 elseif nOption == 2 then
 	term.setBackgroundColor(colors.black)
 	term.setTextColor(colors.white)
-    shell.run("mIOS/.programs")
+    shell.run("DDE/.programs")
 elseif nOption == 3 then
 	term.setBackgroundColor(colors.black)
 	term.setTextColor(colors.white)
-    shell.run("mIOS/.shutdown")
+    shell.run("DDE/.shutdown")
 elseif nOption == 4 then
 	term.setBackgroundColor(colors.black)
 	term.setTextColor(colors.white)
-    shell.run("mIOS/.options")
+    shell.run("DDE/.options")
 end

@@ -1,1 +1,1 @@
-shell.run("mIOS/.start")
+shell.run("DDE/.start")

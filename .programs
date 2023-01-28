@@ -92,7 +92,7 @@ term.clear()
 if nOption == 1 then
 	term.setBackgroundColor(colors.black)
 	term.setTextColor(colors.white)
-    shell.run("mIOS/.programs")
+    shell.run("DDE/.programs")
 elseif nOption == 2 then
 	term.setBackgroundColor(colors.black)
 	term.setTextColor(colors.white)
@@ -126,5 +126,5 @@ elseif nOption == 5 then
 elseif nOption == 6 then
 	term.setBackgroundColor(colors.black)
 	term.setTextColor(colors.white)
-    shell.run("mIOS/.start")
+    shell.run("DDE/.start")
 end

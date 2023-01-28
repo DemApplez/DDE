@@ -95,5 +95,5 @@ elseif nOption == 3 then
 	rednet.close("right")
 	term.setBackgroundColor(colors.black)
 	term.setTextColor(colors.white)
-    shell.run("mIOS/.start")
+    shell.run("DDE/.start")
 end
