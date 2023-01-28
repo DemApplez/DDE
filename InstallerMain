@@ -1,0 +1,220 @@
+term.clear()
+ 
+term.setCursorPos(1,1)
+ 
+print("Beginning Download Of")
+sleep(0.5)
+print("")
+print("DDE Version 0.4")
+print("")
+ 
+sleep(0.5)
+ 
+function dlComplete(name)
+	write(name)
+	print(" File Downloaded Successfully")
+end
+ 
+local r = http.get("https://raw.githubusercontent.com/DemApplez/DDE/main/.start")
+local f = fs.open(shell.resolve(".start"),"w")
+f.write(r.readAll())
+f.close()
+r.close()
+ 
+dlComplete(".start")
+ 
+ 
+local r = http.get("https://raw.githubusercontent.com/DemApplez/DDE/main/.startupLogo")
+local f = fs.open(shell.resolve(".startupLogo"),"w")
+f.write(r.readAll())
+f.close()
+r.close()
+ 
+dlComplete(".startupLogo")
+ 
+ 
+local r = http.get("https://raw.githubusercontent.com/DemApplez/DDE/main/.shutdown")
+local f = fs.open(shell.resolve(".shutdown"),"w")
+f.write(r.readAll())
+f.close()
+r.close()
+ 
+dlComplete(".shutdown")
+ 
+ 
+local r = http.get("https://raw.githubusercontent.com/DemApplez/DDE/main/.command")
+local f = fs.open(shell.resolve(".command"),"w")
+f.write(r.readAll())
+f.close()
+r.close()
+ 
+dlComplete(".command")
+ 
+ 
+local r = http.get("https://raw.githubusercontent.com/DemApplez/DDE/main/autorun")
+local f = fs.open(shell.resolve("autorun"),"w")
+f.write(r.readAll())
+f.close()
+r.close()
+ 
+dlComplete("autorun")
+ 
+ 
+local r = http.get("https://raw.githubusercontent.com/DemApplez/DDE/main/BACK")
+local f = fs.open(shell.resolve("BACK"),"w")
+f.write(r.readAll())
+f.close()
+r.close()
+ 
+dlComplete("BACK")
+ 
+ 
+local r = http.get("https://raw.githubusercontent.com/DemApplez/DDE/main/.uninstall")
+local f = fs.open(shell.resolve(".uninstall"),"w")
+f.write(r.readAll())
+f.close()
+r.close()
+ 
+dlComplete(".uninstall")
+ 
+ 
+local r = http.get("https://raw.githubusercontent.com/DemApplez/DDE/main/.receiveGlobal")
+local f = fs.open(shell.resolve(".receiveGlobal"),"w")
+f.write(r.readAll())
+f.close()
+r.close()
+ 
+dlComplete(".receiveGlobal")
+ 
+ 
+local r = http.get("https://raw.githubusercontent.com/DemApplez/DDE/main/.backup")
+local f = fs.open(shell.resolve(".backup"),"w")
+f.write(r.readAll())
+f.close()
+r.close()
+ 
+dlComplete(".backup")
+ 
+ 
+local r = http.get("https://raw.githubusercontent.com/DemApplez/DDE/main/.updateChecker")
+local f = fs.open(shell.resolve(".updateChecker"),"w")
+f.write(r.readAll())
+f.close()
+r.close()
+ 
+dlComplete(".updateChecker")
+ 
+ 
+local r = http.get("https://raw.githubusercontent.com/DemApplez/DDE/main/.deleteos")
+local f = fs.open(shell.resolve(".deleteos"),"w")
+f.write(r.readAll())
+f.close()
+r.close()
+ 
+dlComplete(".deleteos")
+ 
+ 
+local r = http.get("https://raw.githubusercontent.com/DemApplez/DDE/main/.options")
+local f = fs.open(shell.resolve(".options"),"w")
+f.write(r.readAll())
+f.close()
+r.close()
+ 
+dlComplete(".options")
+ 
+ 
+local r = http.get("https://raw.githubusercontent.com/DemApplez/DDE/main/.programs")
+local f = fs.open(shell.resolve(".programs"),"w")
+f.write(r.readAll())
+f.close()
+r.close()
+ 
+dlComplete(".programs")
+ 
+ 
+local r = http.get("https://raw.githubusercontent.com/DemApplez/DDE/main/.restore")
+local f = fs.open(shell.resolve(".restore"),"w")
+f.write(r.readAll())
+f.close()
+r.close()
+ 
+dlComplete(".restore")
+ 
+
+local r = http.get("https://raw.githubusercontent.com/DemApplez/DDE/main/.sendPrivate")
+local f = fs.open(shell.resolve(".sendPrivate"),"w")
+f.write(r.readAll())
+f.close()
+r.close()
+ 
+dlComplete(".sendPrivate")
+ 
+
+local r = http.get("https://raw.githubusercontent.com/DemApplez/DDE/main/.sendGlobal")
+local f = fs.open(shell.resolve(".sendGlobal"),"w")
+f.write(r.readAll())
+f.close()
+r.close()
+ 
+dlComplete(".sendGlobal")
+ 
+
+local r = http.get("https://raw.githubusercontent.com/DemApplez/DDE/main/.globalChoose")
+local f = fs.open(shell.resolve(".globalChoose"),"w")
+f.write(r.readAll())
+f.close()
+r.close()
+ 
+dlComplete(".globalChoose")
+ 
+
+local r = http.get("https://raw.githubusercontent.com/DemApplez/DDE/main/.messaging")
+local f = fs.open(shell.resolve(".messaging"),"w")
+f.write(r.readAll())
+f.close()
+r.close()
+ 
+dlComplete(".messaging")
+ 
+
+local r = http.get("https://raw.githubusercontent.com/DemApplez/DDE/main/.messagingLoading")
+local f = fs.open(shell.resolve(".messagingLoading"),"w")
+f.write(r.readAll())
+f.close()
+r.close()
+ 
+dlComplete(".messagingLoading")
+ 
+
+fs.move("autorun","startup/autorun")
+fs.move(".start","DDE/.start")
+fs.move(".startupLogo","DDE/.startupLogo")
+fs.move(".shutdown","DDE/.shutdown")
+fs.move(".command","DDE/.command")
+fs.move(".uninstall","DDE/.uninstall")
+fs.move(".receiveGlobal","programs/.receiveGlobal")
+fs.move(".backup","DDE/.backup")
+fs.move(".updateChecker","DDE/.updateChecker")
+fs.move(".deleteos","DDE/.deleteos")
+fs.move(".options","DDE/.options")
+fs.move(".programs","DDE/.programs")
+fs.move(".restore","DDE/.restore")
+fs.move(".sendPrivate","programs/.sendPrivate")
+fs.move(".sendGlobal","programs/.sendGlobal")
+fs.move(".globalChoose","programs/.globalChoose")
+fs.move(".messaging","programs/.messaging")
+fs.move(".messagingLoading","programs/.messagingLoading")
+ 
+sleep(0.5)
+ 
+print("")
+print("Setup Complete, Thanks For Installing")
+sleep(0.5)
+print("")
+print("WARNING: Some Features Are Still Not Present")
+print("Example: Private Messaging In Messaging App")
+sleep(2)
+ 
+fs.delete("installer")
+fs.delete("InstallerMain")
+os.reboot()
