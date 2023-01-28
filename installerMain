@@ -184,6 +184,15 @@ f.close()
 r.close()
  
 dlComplete(".messagingLoading")
+
+
+local r = http.get("https://raw.githubusercontent.com/DemApplez/DDE/main/.login")
+local f = fs.open(shell.resolve(".login"),"w")
+f.write(r.readAll())
+f.close()
+r.close()
+ 
+dlComplete(".login")
  
 
 fs.move("autorun","startup/autorun")
