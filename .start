@@ -20,7 +20,7 @@ local function drawMenuGraphics()
 	term.setTextColor(colors.white)
     term.clear()
     term.setCursorPos(1,1)
-    term.write("mIOS Main Release #0295")
+    term.write("DDE Version 0.4")
     
     term.setCursorPos(w-13,1)
     if nOption == 1 then

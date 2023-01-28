@@ -20,7 +20,7 @@ local function drawMenuGraphics()
 	term.setTextColor(colors.white)
     term.clear()
     term.setCursorPos(1,1)
-    term.write("mIOS Main Release #0295")
+    term.write("DDE Version 0.4")
     
     term.setCursorPos(w-13,1)
     if nOption == 1 then
@@ -130,7 +130,7 @@ if nOption == 1 then
 
 	print("")
 
-	print("Completed Backup Operation, Returning To mIOS")
+	print("Completed Backup Operation, Returning To Doors")
 	sleep(1.5)
 	shell.run("mIOS/.start")
 elseif nOption == 2 then
@@ -150,12 +150,12 @@ elseif nOption == 2 then
 		beginCopy("appdata", "disk/.backup/appdata")
 		beginCopy("BACK", "disk/.backup/BACK")
 		print("")
-		print("Completed Backup Operation, Returning To mIOS")
+		print("Completed Backup Operation, Returning To Doors")
 	else
 		print("")
 		print("NO DISKETTE INSERTED")
 		sleep(2)
-		print("Returning To mIOS")
+		print("Returning To Doors")
 	end
 	print("")
 	sleep(1.5)
@@ -169,13 +169,13 @@ elseif nOption == 3 then
 	sleep(3)
 	if fs.exists(".backup") then
 		fs.delete(".backup")
-		print("Completed Deletion Operation, Returning To mIOS")
+		print("Completed Deletion Operation, Returning To Doors")
 	else
 		print("")
 		print("Operation Could Not Be Completed")
 		print("Backup Folder Not Found")
 		sleep(2)
-		print("Returning To mIOS")
+		print("Returning To Doors")
 	end
 	print("")
 	sleep(1.5)
@@ -189,12 +189,12 @@ elseif nOption == 4 then
 	sleep(3)
 	if fs.exists("disk/.backup") then
 		fs.delete("disk/.backup")
-		print("Completed Deletion Operation, Returning To mIOS")
+		print("Completed Deletion Operation, Returning To Doors")
 	else
 		print("")
 		print("INCORRECT OR NO DISKETTE INSERTED")
 		sleep(2)
-		print("Returning To mIOS")
+		print("Returning To Doors")
 	end
 	print("")
 	sleep(1.5)
@@ -212,12 +212,12 @@ elseif nOption == 5 then
 		fs.delete("disk/.backup")
 		print("Floppy Diskette Backup Deleted Successfully")
 		sleep(0.25)
-		print("Completed Deletion Operation, Returning To mIOS")
+		print("Completed Deletion Operation, Returning To Doors")
 	else
 		print("")
 		print("Operation Could Not Be Completed")
 		sleep(2)
-		print("Returning To mIOS")
+		print("Returning To Doors")
 	end
 	print("")
 	sleep(1.5)

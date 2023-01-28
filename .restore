@@ -117,7 +117,7 @@ if nOption == 1 then
 	else
 		print("Operation Could Not Be Completed")
 		sleep(3)
-		print("Returning To mIOS")
+		print("Returning To Doors")
 		sleep(2)
 		shell.run("mIOS/.start")
 	end
@@ -155,7 +155,7 @@ elseif nOption == 2 then
 	else
 		print("INCORRECT OR NO DISKETTE INSERTED")
 		sleep(3)
-		print("Returning To mIOS")
+		print("Returning To Doors")
 		sleep(2)
 		shell.run("mIOS/.start")
 	end

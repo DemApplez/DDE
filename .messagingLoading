@@ -193,7 +193,7 @@ if nOption == 2 then
                             print("Incorrect Response, Retrying...")
                             retries = retries + 1
                             if retries == 4 then
-                                print("To Much Traffic Or Server Is Down, Try Again Later.")
+                                print("Too Much Traffic Or Server Is Down, Try Again Later.")
                                 sleep(3)
                             end
                         end
