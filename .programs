@@ -1,0 +1,130 @@
+os.pullEvent = os.pullEventRaw
+
+local w,h = term.getSize()
+
+--Print On Center Function
+
+function printCenter(y,s)
+	local x = math.floor((w - string.len(s)) /2)
+	term.setCursorPos(x,y)
+	term.clearLine()
+	term.write(s)
+end
+
+--Draws Menu Function
+
+local nOption = 1
+
+local function drawMenuGraphics()
+	term.setBackgroundColor(colors.blue)
+	term.setTextColor(colors.white)
+    term.clear()
+    term.setCursorPos(1,1)
+    term.write("mIOS Main Release #0295")
+    
+    term.setCursorPos(w-13,1)
+    if nOption == 1 then
+     term.write("         Paint")
+    elseif nOption == 2 then
+     term.write("      TextEdit")
+    elseif nOption == 3 then
+     term.write("     Messaging")
+    elseif nOption == 4 then
+     term.write("          Worm")
+    elseif nOption == 5 then
+     term.write("     Adventure")
+    elseif nOption == 6 then
+     term.write("          Back")
+    else
+     end
+end
+
+term.clear()
+local function drawFrontend()
+   term.setTextColor(colors.black)
+   term.setBackgroundColor(colors.white)
+   printCenter( math.floor(h/2) - 7, "")
+   printCenter( math.floor(h/2) - 6, "")
+   printCenter( math.floor(h/2) - 5, "")
+   printCenter( math.floor(h/2) - 4, "")
+   printCenter( math.floor(h/2) - 3, "")
+   printCenter( math.floor(h/2) - 2, "Programs List" )
+   printCenter( math.floor(h/2) - 1, "")
+   printCenter( math.floor(h/2) + 0, ((nOption == 1) and ">>Paint<<") or "Paint" )
+   printCenter( math.floor(h/2) + 1, ((nOption == 2) and ">>TextEdit<<") or "TextEdit" )
+   printCenter( math.floor(h/2) + 2, ((nOption == 3) and ">>Messaging<<") or "Messaging" )
+   printCenter( math.floor(h/2) + 3, ((nOption == 4) and ">>Worm<<") or "Worm" )
+   printCenter( math.floor(h/2) + 4, ((nOption == 5) and ">>Adventure<<") or "Adventure" )
+   printCenter( math.floor(h/2) + 5, ((nOption == 6) and ">>Back<<") or "Back" )
+   printCenter( math.floor(h/2) + 6, "")
+   printCenter( math.floor(h/2) + 7, "")
+   printCenter( math.floor(h/2) + 8, "")
+   printCenter( math.floor(h/2) + 9, "")
+   printCenter( math.floor(h/2) + 10, "")
+end
+
+drawMenuGraphics()
+drawFrontend()
+
+while true do
+    local e,p = os.pullEvent()
+        if e == "key" then
+            local key = p
+            if key == keys.w or key == keys.up then
+                if nOption > 1 then 
+                    nOption = nOption - 1
+                    drawMenuGraphics()
+                    drawFrontend()
+                end
+            elseif key == keys.s or key == keys.down then
+                if nOption < 6 then
+                    nOption  = nOption + 1
+                    drawMenuGraphics()
+                    drawFrontend()
+                end
+        elseif key == keys.enter then
+            break
+        end
+    end
+end
+term.clear()
+
+if nOption == 1 then
+	term.setBackgroundColor(colors.black)
+	term.setTextColor(colors.white)
+    shell.run("mIOS/.programs")
+elseif nOption == 2 then
+	term.setBackgroundColor(colors.black)
+	term.setTextColor(colors.white)
+	term.clear()
+	term.setCursorPos(1,1)
+	print("When Your Finished, Type BACK To Return To Main Menu")
+	sleep(3)
+    shell.run("edit NewDocument")
+elseif nOption == 3 then
+	term.setBackgroundColor(colors.black)
+	term.setTextColor(colors.white)
+    shell.run("programs/.messagingLoading")
+elseif nOption == 4 then
+	term.setBackgroundColor(colors.black)
+	term.setTextColor(colors.white)
+	term.clear()
+	term.setCursorPos(1,1)
+	print("When Your Finished, Type BACK To Return To Main Menu")
+	sleep(3)
+    shell.run("worm")
+elseif nOption == 5 then
+	term.setBackgroundColor(colors.black)
+	term.setTextColor(colors.white)
+	term.clear()
+	term.setCursorPos(1,1)
+	print("When Your Finished, Type Exit And Then Type BACK To Return To Main Menu")
+	sleep(3.5)
+	term.clear()
+	term.setCursorPos(1,1)
+    shell.run("adventure")
+elseif nOption == 6 then
+	term.setBackgroundColor(colors.black)
+	term.setTextColor(colors.white)
+    shell.run("mIOS/.start")
+end

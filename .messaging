@@ -1,0 +1,99 @@
+os.pullEvent = os.pullEventRaw
+
+local w,h = term.getSize()
+
+--Print On Center Function
+
+function printCenter(y,s)
+	local x = math.floor((w - string.len(s)) /2)
+	term.setCursorPos(x,y)
+	term.clearLine()
+	term.write(s)
+end
+
+--Draws Menu Function
+
+rednet.open("right")
+
+local findUsername = fs.open("appdata/.messagingFirstTimeBoot", "r")
+
+local Username = findUsername.readAll()
+
+findUsername.close()
+
+local nOption = 1
+term.setPaletteColor(colors.blue, 0x0000ff)
+local function drawMenuGraphics()
+	term.setBackgroundColor(colors.green)
+	term.setTextColor(colors.white)
+    term.clear()
+    term.setCursorPos(1,1)
+    term.write("Welcome To The Messaging App")
+end
+
+term.clear()
+local function drawFrontend()
+   term.setTextColor(colors.black)
+   term.setBackgroundColor(colors.white)
+   printCenter( math.floor(h/2) - 7, "")
+   printCenter( math.floor(h/2) - 6, "")
+   printCenter( math.floor(h/2) - 5, "")
+   printCenter( math.floor(h/2) - 4, "Welcome: " .. Username)
+   printCenter( math.floor(h/2) - 3, "")
+   printCenter( math.floor(h/2) - 2, "Pick A Chat" )
+   printCenter( math.floor(h/2) - 1, "")
+   printCenter( math.floor(h/2) + 0, ((nOption == 1) and ">>Global Chat<<") or "Global Chat" )
+   printCenter( math.floor(h/2) + 1, ((nOption == 2) and ">>Private Message<<") or "Private Message" )
+   printCenter( math.floor(h/2) + 2, ((nOption == 3) and ">>Back<<") or "Back" )
+   printCenter( math.floor(h/2) + 3, "")
+   printCenter( math.floor(h/2) + 4, "")
+   printCenter( math.floor(h/2) + 5, "")
+   printCenter( math.floor(h/2) + 6, "")
+   printCenter( math.floor(h/2) + 7, "")
+   printCenter( math.floor(h/2) + 8, "")
+   printCenter( math.floor(h/2) + 9, "")
+   printCenter( math.floor(h/2) + 10, "")
+end
+
+drawMenuGraphics()
+drawFrontend()
+
+while true do
+    local e,p = os.pullEvent()
+        if e == "key" then
+            local key = p
+            if key == keys.w or key == keys.up then
+                if nOption > 1 then 
+                    nOption = nOption - 1
+                    drawMenuGraphics()
+                    drawFrontend()
+                end
+            elseif key == keys.s or key == keys.down then
+                if nOption < 3 then
+                    nOption  = nOption + 1
+                    drawMenuGraphics()
+                    drawFrontend()
+                end
+        elseif key == keys.enter then
+            break
+        end
+    end
+end
+term.clear()
+
+if nOption == 1 then
+	term.setBackgroundColor(colors.black)
+	term.setTextColor(colors.white)
+    shell.run("programs/.globalChoose")
+elseif nOption == 2 then
+	term.setBackgroundColor(colors.black)
+	term.setTextColor(colors.white)
+    shell.run("programs/.sendPrivate")
+elseif nOption == 3 then
+	printCenter( math.floor(h/2) + 0, "Goodbye")
+	sleep(2)
+	rednet.close("right")
+	term.setBackgroundColor(colors.black)
+	term.setTextColor(colors.white)
+    shell.run("mIOS/.start")
+end

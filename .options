@@ -1,0 +1,110 @@
+os.pullEvent = os.pullEventRaw
+
+local w,h = term.getSize()
+
+--Print On Center Function
+
+function printCenter(y,s)
+	local x = math.floor((w - string.len(s)) /2)
+	term.setCursorPos(x,y)
+	term.clearLine()
+	term.write(s)
+end
+
+--Draws Menu Function
+
+local nOption = 1
+
+local function drawMenuGraphics()
+	term.setBackgroundColor(colors.blue)
+	term.setTextColor(colors.white)
+    term.clear()
+    term.setCursorPos(1,1)
+    term.write("mIOS Main Release #0295")
+    
+    term.setCursorPos(w-13,1)
+    if nOption == 1 then
+     term.write("        Backup")
+    elseif nOption == 2 then
+     term.write("       Updates")
+    elseif nOption == 3 then
+     term.write("     Uninstall")
+    elseif nOption == 4 then
+     term.write("       Restore")
+    elseif nOption == 5 then
+     term.write("          Back")
+    else
+     end
+end
+
+term.clear()
+local function drawFrontend()
+   term.setTextColor(colors.black)
+   term.setBackgroundColor(colors.white)
+   printCenter( math.floor(h/2) - 7, "")
+   printCenter( math.floor(h/2) - 6, "")
+   printCenter( math.floor(h/2) - 5, "")
+   printCenter( math.floor(h/2) - 4, "")
+   printCenter( math.floor(h/2) - 3, "")
+   printCenter( math.floor(h/2) - 2, "Options Menu" )
+   printCenter( math.floor(h/2) - 1, "")
+   printCenter( math.floor(h/2) + 0, ((nOption == 1) and ">>Backup All System Files<<") or "Backup All System Files" )
+   printCenter( math.floor(h/2) + 1, ((nOption == 2) and ">>Check For Updates<<") or "Check For Updates" )
+   printCenter( math.floor(h/2) + 2, ((nOption == 3) and ">>Uninstall mIOS<<") or "Uninstall mIOS" )
+   printCenter( math.floor(h/2) + 3, ((nOption == 4) and ">>Restore Backup<<") or "Restore Backup" )
+   printCenter( math.floor(h/2) + 4, ((nOption == 5) and ">>Back<<") or "Back" )
+   printCenter( math.floor(h/2) + 5, "")
+   printCenter( math.floor(h/2) + 6, "")
+   printCenter( math.floor(h/2) + 7, "")
+   printCenter( math.floor(h/2) + 8, "")
+   printCenter( math.floor(h/2) + 9, "")
+   printCenter( math.floor(h/2) + 10, "")
+end
+
+drawMenuGraphics()
+drawFrontend()
+
+while true do
+    local e,p = os.pullEvent()
+        if e == "key" then
+            local key = p
+            if key == keys.w or key == keys.up then
+                if nOption > 1 then 
+                    nOption = nOption - 1
+                    drawMenuGraphics()
+                    drawFrontend()
+                end
+            elseif key == keys.s or key == keys.down then
+                if nOption < 5 then
+                    nOption  = nOption + 1
+                    drawMenuGraphics()
+                    drawFrontend()
+                end
+        elseif key == keys.enter then
+            break
+        end
+    end
+end
+term.clear()
+
+if nOption == 1 then
+	term.setBackgroundColor(colors.black)
+	term.setTextColor(colors.white)
+    shell.run("mIOS/.backup")
+elseif nOption == 2 then
+	term.setBackgroundColor(colors.black)
+	term.setTextColor(colors.white)
+    shell.run("mIOS/.updateChecker")
+elseif nOption == 3 then
+	term.setBackgroundColor(colors.black)
+	term.setTextColor(colors.white)
+    shell.run("mIOS/.uninstall")
+elseif nOption == 4 then
+	term.setBackgroundColor(colors.black)
+	term.setTextColor(colors.white)
+    shell.run("mIOS/.restore")
+elseif nOption == 5 then
+	term.setBackgroundColor(colors.black)
+	term.setTextColor(colors.white)
+    shell.run("mIOS/.start")
+end

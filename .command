@@ -1,0 +1,5 @@
+term.clear()
+term.setCursorPos(1,1)
+print("You Are Currently In The mIOS Command Window")
+print("To Return To Main Menu, Type BACK")
+print("---------------------------------------------")

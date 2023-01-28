@@ -1,0 +1,15 @@
+term.setCursorPos(1,1)
+term.clear()
+
+print("To Excape Out Of Receiving Program, Push Power Button On the Side")
+
+print("")
+sleep(2)
+print("Beginning To Display Messages...")
+print("")
+
+while true do
+	id, message = rednet.receive()
+	write(message[2] .. ": ")
+	print(message[1])
+end

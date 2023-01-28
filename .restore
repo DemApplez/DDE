@@ -1,0 +1,167 @@
+os.pullEvent = os.pullEventRaw
+
+local w,h = term.getSize()
+
+--Print On Center Function
+
+function printCenter(y,s)
+	local x = math.floor((w - string.len(s)) /2)
+	term.setCursorPos(x,y)
+	term.clearLine()
+	term.write(s)
+end
+
+--Draws Menu Function
+
+local nOption = 1
+term.setPaletteColor(colors.blue, 0x0000ff)
+local function drawMenuGraphics()
+	term.setBackgroundColor(colors.blue)
+	term.setTextColor(colors.white)
+    term.clear()
+    term.setCursorPos(1,1)
+    term.write("mIOS Main Release #0295")
+    
+    term.setCursorPos(w-13,1)
+    if nOption == 1 then
+     term.write("      From BIS")
+    elseif nOption == 2 then
+     term.write("     From Disk")
+    elseif nOption == 3 then
+     term.write("          Back")
+    else
+     end
+end
+
+term.clear()
+local function drawFrontend()
+   term.setTextColor(colors.black)
+   term.setBackgroundColor(colors.white)
+   printCenter( math.floor(h/2) - 7, "")
+   printCenter( math.floor(h/2) - 6, "")
+   printCenter( math.floor(h/2) - 5, "")
+   printCenter( math.floor(h/2) - 4, "")
+   printCenter( math.floor(h/2) - 3, "")
+   printCenter( math.floor(h/2) - 2, "Restore Menu" )
+   printCenter( math.floor(h/2) - 1, "")
+   printCenter( math.floor(h/2) + 0, ((nOption == 1) and ">>Restore From Built-In Storage<<") or "Restore From Built-In Storage" )
+   printCenter( math.floor(h/2) + 1, ((nOption == 2) and ">>Restore From Disk<<") or "Restore From Disk" )
+   printCenter( math.floor(h/2) + 2, ((nOption == 3) and ">>Back<<") or "Back" )
+   printCenter( math.floor(h/2) + 3, "")
+   printCenter( math.floor(h/2) + 4, "")
+   printCenter( math.floor(h/2) + 5, "")
+   printCenter( math.floor(h/2) + 6, "")
+   printCenter( math.floor(h/2) + 7, "")
+   printCenter( math.floor(h/2) + 8, "")
+   printCenter( math.floor(h/2) + 9, "")
+   printCenter( math.floor(h/2) + 10, "")
+end
+
+drawMenuGraphics()
+drawFrontend()
+
+while true do
+    local e,p = os.pullEvent()
+        if e == "key" then
+            local key = p
+            if key == keys.w or key == keys.up then
+                if nOption > 1 then 
+                    nOption = nOption - 1
+                    drawMenuGraphics()
+                    drawFrontend()
+                end
+            elseif key == keys.s or key == keys.down then
+                if nOption < 3 then
+                    nOption  = nOption + 1
+                    drawMenuGraphics()
+                    drawFrontend()
+                end
+        elseif key == keys.enter then
+            break
+        end
+    end
+end
+term.clear()
+
+if nOption == 1 then
+	term.setBackgroundColor(colors.black)
+	term.setTextColor(colors.white)
+	term.clear()
+	term.setCursorPos(1,1)
+    print("Restoring OS From: Built-In Backup")
+	print("")
+	print("")
+	sleep(3)
+	if fs.exists(".backup") then
+		fs.delete("mIOS")
+		if fs.exists("appdata") then
+			fs.delete("appdata")
+		end
+		fs.delete("programs")
+		fs.delete("startup")
+		fs.delete("BACK")
+		
+		fs.copy(".backup/mIOS", "mIOS")
+		if fs.exists(".backup/appdata") then
+			fs.copy(".backup/appdata", "appdata")
+		end
+		fs.copy(".backup/programs", "programs")
+		fs.copy(".backup/startup", "startup")
+		fs.copy(".backup/BACK", "BACK")
+		
+		print("Restoring Complete!")
+		sleep(0.5)
+		print("Rebooting...")
+		sleep(2)
+		os.reboot()
+	else
+		print("Operation Could Not Be Completed")
+		sleep(3)
+		print("Returning To mIOS")
+		sleep(2)
+		shell.run("mIOS/.start")
+	end
+elseif nOption == 2 then
+	term.setBackgroundColor(colors.black)
+	term.setTextColor(colors.white)
+	term.clear()
+	term.setCursorPos(1,1)
+	print("Restoring OS From: Disk Backup")
+	print("")
+	print("")
+	sleep(3)
+	if fs.exists("disk/.backup") then
+		fs.delete("mIOS")
+		if fs.exists("appdata") then
+			fs.delete("appdata")
+		end
+		fs.delete("programs")
+		fs.delete("startup")
+		fs.delete("BACK")
+		
+		fs.copy("disk/.backup/mIOS", "mIOS")
+		if fs.exists("disk/.backup/appdata") then
+			fs.copy("disk/.backup/appdata", "appdata")
+		end
+		fs.copy("disk/.backup/programs", "programs")
+		fs.copy("disk/.backup/startup", "startup")
+		fs.copy("disk/.backup/BACK", "BACK")
+		
+		print("Restoring Complete!")
+		sleep(0.5)
+		print("Rebooting...")
+		sleep(2)
+		os.reboot()
+	else
+		print("INCORRECT OR NO DISKETTE INSERTED")
+		sleep(3)
+		print("Returning To mIOS")
+		sleep(2)
+		shell.run("mIOS/.start")
+	end
+	
+elseif nOption == 3 then
+	term.setBackgroundColor(colors.black)
+	term.setTextColor(colors.white)
+    shell.run("mIOS/.options")
+end

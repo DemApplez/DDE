@@ -1,0 +1,29 @@
+term.setCursorPos(1,1)
+term.clear()
+print("To Exit, Type 'exit' Into The Message To Send Area")
+print("")
+
+local messageEnd = 0
+
+while messageEnd == 0 do
+	write("Message To Send: ")
+	input2 = read()
+	if input2 == "exit" or input2 == "Exit" or input2 == "EXIT" then
+		messageEnd = 1
+	end
+
+	getServerID = fs.open("appdata/.messagingServerID", "r")
+	input1 = tonumber(getServerID.readAll())
+
+	messageType = "0"
+	
+	findUsername = fs.open("appdata/.messagingFirstTimeBoot", "r")
+	
+	input2 = {input2, findUsername.readAll()}
+	
+	rednet.send(input1, input2, messageType)
+end
+
+print("Exiting...")
+sleep(1.5)
+shell.run("programs/.globalChoose")

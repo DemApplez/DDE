@@ -1,0 +1,229 @@
+os.pullEvent = os.pullEventRaw
+
+local w,h = term.getSize()
+
+--Print On Center Function
+
+function printCenter(y,s)
+	local x = math.floor((w - string.len(s)) /2)
+	term.setCursorPos(x,y)
+	term.clearLine()
+	term.write(s)
+end
+
+--Draws Menu Function
+
+local nOption = 1
+term.setPaletteColor(colors.blue, 0x0000ff)
+local function drawMenuGraphics()
+	term.setBackgroundColor(colors.blue)
+	term.setTextColor(colors.white)
+    term.clear()
+    term.setCursorPos(1,1)
+    term.write("mIOS Main Release #0295")
+    
+    term.setCursorPos(w-13,1)
+    if nOption == 1 then
+     term.write("    Backup BIS")
+    elseif nOption == 2 then
+     term.write("   Backup Disk")
+    elseif nOption == 3 then
+     term.write("    Delete BIS")
+    elseif nOption == 4 then
+     term.write("   Delete Disk")
+    elseif nOption == 5 then
+     term.write("    Delete All")
+    elseif nOption == 6 then
+     term.write("          Back")
+    else
+     end
+end
+
+term.clear()
+local function drawFrontend()
+   term.setTextColor(colors.black)
+   term.setBackgroundColor(colors.white)
+   printCenter( math.floor(h/2) - 7, "")
+   printCenter( math.floor(h/2) - 6, "")
+   printCenter( math.floor(h/2) - 5, "")
+   printCenter( math.floor(h/2) - 4, "")
+   printCenter( math.floor(h/2) - 3, "")
+   printCenter( math.floor(h/2) - 2, "Main Menu" )
+   printCenter( math.floor(h/2) - 1, "")
+   printCenter( math.floor(h/2) + 0, ((nOption == 1) and ">>Backup To Built-In Storage<<") or "Backup To Built-In Storage" )
+   printCenter( math.floor(h/2) + 1, ((nOption == 2) and ">>Backup To Diskette<<") or "Backup To Diskette" )
+   printCenter( math.floor(h/2) + 2, ((nOption == 3) and ">>Delete Built-In Backup<<") or "Delete Built-In Backup" )
+   printCenter( math.floor(h/2) + 3, ((nOption == 4) and ">>Delete Diskette Backup<<") or "Delete Diskette Backup" )
+   printCenter( math.floor(h/2) + 4, ((nOption == 5) and ">>Delete All Backups<<") or "Delete All Backups" )
+   printCenter( math.floor(h/2) + 5, ((nOption == 6) and ">>Back<<") or "Back" )
+   printCenter( math.floor(h/2) + 6, "")
+   printCenter( math.floor(h/2) + 7, "")
+   printCenter( math.floor(h/2) + 8, "")
+   printCenter( math.floor(h/2) + 9, "")
+   printCenter( math.floor(h/2) + 10, "")
+end
+
+drawMenuGraphics()
+drawFrontend()
+
+while true do
+    local e,p = os.pullEvent()
+        if e == "key" then
+            local key = p
+            if key == keys.w or key == keys.up then
+                if nOption > 1 then 
+                    nOption = nOption - 1
+                    drawMenuGraphics()
+                    drawFrontend()
+                end
+            elseif key == keys.s or key == keys.down then
+                if nOption < 6 then
+                    nOption  = nOption + 1
+                    drawMenuGraphics()
+                    drawFrontend()
+                end
+        elseif key == keys.enter then
+            break
+        end
+    end
+end
+term.clear()
+
+
+
+
+
+local function beginCopy(filename, location)
+	if fs.exists(location) then
+		term.setTextColor(colors.red)
+		write(filename)
+		print(" Backed Up Already. Did You Not Delete All Backups Before This?")
+		term.setTextColor(colors.black)
+		sleep(1)
+	else
+		fs.copy(filename, location)
+		term.setTextColor(colors.green)
+		write(filename)
+		print(" Successfully Backed Up")
+		term.setTextColor(colors.black)
+		sleep(0.25)
+	end
+end
+
+
+
+
+if nOption == 1 then
+	term.clear()
+	term.setCursorPos(1,1)
+
+	print("Beginning Backup Operation To: Built-In Storage")
+	print("")
+	sleep(1.5)
+	beginCopy("mIOS", ".backup/mIOS")
+	beginCopy("programs", ".backup/programs")
+	beginCopy("startup", ".backup/startup")
+	if fs.exists("appdata") then
+		beginCopy("appdata", ".backup/appdata")
+	end
+	beginCopy("BACK", ".backup/BACK")
+
+	print("")
+
+	print("Completed Backup Operation, Returning To mIOS")
+	sleep(1.5)
+	shell.run("mIOS/.start")
+elseif nOption == 2 then
+	term.clear()
+	term.setCursorPos(1,1)
+
+	print("Beginning Backup Operation To: Floppy Diskette")
+	print("")
+	sleep(1.5)
+	if fs.exists("disk") then
+		beginCopy("mIOS", "disk/.backup/mIOS")
+		beginCopy("programs", "disk/.backup/programs")
+		beginCopy("startup", "disk/.backup/startup")
+		if fs.exists("appdata") then
+			beginCopy("appdata", "disk/.backup/appdata")
+		end
+		beginCopy("appdata", "disk/.backup/appdata")
+		beginCopy("BACK", "disk/.backup/BACK")
+		print("")
+		print("Completed Backup Operation, Returning To mIOS")
+	else
+		print("")
+		print("NO DISKETTE INSERTED")
+		sleep(2)
+		print("Returning To mIOS")
+	end
+	print("")
+	sleep(1.5)
+	shell.run("mIOS/.start")
+elseif nOption == 3 then
+	term.clear()
+	term.setCursorPos(1,1)
+	
+	print("Deleting Backup On: Built-In Storage")
+	print("")
+	sleep(3)
+	if fs.exists(".backup") then
+		fs.delete(".backup")
+		print("Completed Deletion Operation, Returning To mIOS")
+	else
+		print("")
+		print("Operation Could Not Be Completed")
+		print("Backup Folder Not Found")
+		sleep(2)
+		print("Returning To mIOS")
+	end
+	print("")
+	sleep(1.5)
+	shell.run("mIOS/.start")
+elseif nOption == 4 then
+	term.clear()
+	term.setCursorPos(1,1)
+
+	print("Deleting Backup On: Floppy Diskette")
+	print("")
+	sleep(3)
+	if fs.exists("disk/.backup") then
+		fs.delete("disk/.backup")
+		print("Completed Deletion Operation, Returning To mIOS")
+	else
+		print("")
+		print("INCORRECT OR NO DISKETTE INSERTED")
+		sleep(2)
+		print("Returning To mIOS")
+	end
+	print("")
+	sleep(1.5)
+	shell.run("mIOS/.start")
+elseif nOption == 5 then
+	term.clear()
+	term.setCursorPos(1,1)
+
+	print("Deleting Backup On: All Backup Devices")
+	print("")
+	sleep(3)
+	if fs.exists("disk/.backup") and fs.exists(".backup") then
+		fs.delete(".backup")
+		print("Built-In Storage Backup Deleted Successfully")
+		fs.delete("disk/.backup")
+		print("Floppy Diskette Backup Deleted Successfully")
+		sleep(0.25)
+		print("Completed Deletion Operation, Returning To mIOS")
+	else
+		print("")
+		print("Operation Could Not Be Completed")
+		sleep(2)
+		print("Returning To mIOS")
+	end
+	print("")
+	sleep(1.5)
+	shell.run("mIOS/.start")
+elseif nOption == 6 then
+	term.setBackgroundColor(colors.black)
+	term.setTextColor(colors.white)
+    shell.run("mIOS/.options")
+end

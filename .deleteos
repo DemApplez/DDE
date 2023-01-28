@@ -1,0 +1,23 @@
+term.clear()
+term.setCursorPos(1,1)
+ 
+fs.delete("mIOS")
+print("mIOS Folder Deleted")
+fs.delete("startup")
+print("startup Folder Deleted")
+fs.delete("programs")
+print("programs Folder Deleted")
+if fs.exists("appdata") then
+	fs.delete("appdata")
+	print("appdata Folder Deleted")
+end
+if fs.exists(".backup") then
+	fs.delete(".backup")
+	print(".backup Folder Deleted")
+end
+fs.delete("BACK")
+print("BACK File Deleted")
+ 
+print("OS Uninstall Complete")
+print("")
+print("Thank You For Using mIOS! We Hope To See You Soon")
