@@ -24,7 +24,7 @@ term.setCursorPos(1,3)
 print("Complete")
 
 term.setCursorPos(3,5)
-write("Starting mIOS")
+write("Starting Doors")
 
 for anim=0,3 do
 term.setCursorPos(1,5)
