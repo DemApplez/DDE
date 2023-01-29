@@ -177,11 +177,11 @@ if nOption == 2 then
                         stringy = "blank"
                         id, stringy = rednet.receive(5)
                         if stringy == "SIGNUP COMPLETE" then
-       retries = 5
+							retries = 5
                             print("Congrats! Signup Successful")
                             sleep(2)
                             print("Rebooting OS")
-       sleep(1)
+							sleep(1)
                             local userfile = fs.open("appdata/.messagingFirstTimeBoot", "w")
                             userfile.write(desiredUsername)
                             userfile.close()

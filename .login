@@ -63,24 +63,31 @@ drawMenuGraphics()
 drawFrontend()
 
 while true do
-    local e,p = os.pullEvent()
-    if e == "key" then
-        local key = p
-        if nOption == 1 then
-			term.setCursorPos()
-			desiredUsername = read()
-			if key == keys.enter then
-				nOption = 2
-			end
-		end
-		if nOption == 2 then
-			term.setCursorPos()
-			desiredPassword = read()
-			if key == keys.enter then
-				nOption = 3
-			end
-		end
+   if nOption == 1 then
+		term.setCursorPos(34, 8)
+		desiredUsername = read()
+		nOption = 2
+		break
 	end
+end
+while true do
+	if nOption == 2 then
+		term.setCursorPos(34, 10)
+		desiredPassword = read()
+		nOption = 3
+		break
+	end
+end
+
+local loginStep = 1
+
+if nOption == 3 then
+	local userfile1 = fs.open(".loginInformation/.username", "w")
+	local userfile2 = fs.open(".loginInformation/.password", "w")
+	userfile1.write(desiredUsername)
+    userfile1.close()
+	userfile2.write(desiredUsername)
+    userfile2.close()
 end
 
 term.clear()
