@@ -1,31 +1,33 @@
 term.clear()
-term.setCursorPos(1,1)
-
-print("Welcome To")
-
+term.setCursorPos(21,2)
+sleep(0.5)
+term.write("Welcome To")
+ 
 print("")
-
-print(">====>                                           ")
-sleep(0.1)
-print(">=>   >=>                                        ")
-sleep(0.1)
-print(">=>    >=>    >=>        >=>     >> >==>  >===>  ")
-sleep(0.1)
-print(">=>    >=>  >=>  >=>   >=>  >=>   >=>    >=>     ")
-sleep(0.1)
-print(">=>    >=> >=>    >=> >=>    >=>  >=>      >==>  ")
-sleep(0.1)
-print(">=>   >=>   >=>  >=>   >=>  >=>   >=>        >=> ")
-sleep(0.1)
-print(">====>        >=>        >=>     >==>    >=> >=> ")
-sleep(0.1)
-
-sleep(0.1)
-
+ 
 print("")
-
-print("Development Build Version 0.4")
-
+ 
+print(" >====>                                           ")
+sleep(0.1)
+print(" >=>   >=>                                        ")
+sleep(0.1)
+print(" >=>    >=>    >=>        >=>     >> >==>  >===>  ")
+sleep(0.1)
+print(" >=>    >=>  >=>  >=>   >=>  >=>   >=>    >=>     ")
+sleep(0.1)
+print(" >=>    >=> >=>    >=> >=>    >=>  >=>      >==>  ")
+sleep(0.1)
+print(" >=>   >=>   >=>  >=>   >=>  >=>   >=>        >=> ")
+sleep(0.1)
+print(" >====>        >=>        >=>     >==>    >=> >=> ")
+sleep(0.1)
+ 
+sleep(0.1)
+ 
+term.setCursorPos(1,18)
+ 
+term.write(" Development Build Version 0.4")
+ 
 sleep(2)
-
+ 
 shell.run("DDE/.start")
