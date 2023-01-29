@@ -83,16 +83,6 @@ while true do
 	end
 end
 
-while true do
-	local e,p = os.pullEvent()
-	if nOption == 1 then
-		term.setCursorPos()
-		desiredUsername = read()
-		if desiredUsername != "" && key == keys.enter then
-			
-		end
-	end
-end
 term.clear()
 
 if nOption == 1 then
