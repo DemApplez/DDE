@@ -28,7 +28,7 @@ local function drawMenuGraphics()
     elseif nOption == 2 then
      term.write("      Programs")
     elseif nOption == 3 then
-     term.write("   Shutdown Op")
+     term.write(" Shutdown Opt.")
     elseif nOption == 4 then
      term.write("       Options")
     else
