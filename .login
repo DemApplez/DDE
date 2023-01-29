@@ -13,6 +13,9 @@ end
 
 --Draws Menu Function
 
+local desiredUsername = ""
+local desiredPassword = ""
+
 local nOption = 1
 term.setPaletteColor(colors.blue, 0x0000ff)
 
@@ -25,11 +28,9 @@ local function drawMenuGraphics()
     
     term.setCursorPos(w-13,1)
     if nOption == 1 then
-     term.write("      Shutdown")
+     term.write("Enter Username")
     elseif nOption == 2 then
-     term.write("        Reboot")
-    elseif nOption == 3 then
-     term.write("          Back")
+     term.write("Enter Password")
     else
      end
 end
@@ -39,21 +40,21 @@ local function drawFrontend()
    term.setTextColor(colors.black)
    term.setBackgroundColor(colors.white)
    printCenter( math.floor(h/2) - 7, "")
-   printCenter( math.floor(h/2) - 6, "")
+   printCenter( math.floor(h/2) - 6, "Login")
    printCenter( math.floor(h/2) - 5, "")
    printCenter( math.floor(h/2) - 4, "")
    printCenter( math.floor(h/2) - 3, "")
-   printCenter( math.floor(h/2) - 2, "    ________               ")
-   printCenter( math.floor(h/2) - 1, "   / ______ \\              ")
-   printCenter( math.floor(h/2) + 0, "   || _  _ ||              ")
-   printCenter( math.floor(h/2) + 1, "   ||| || |||              ")
-   printCenter( math.floor(h/2) + 2, "   |||_||_|||              ")
-   printCenter( math.floor(h/2) + 3, "   || _  _o||              ")
-   printCenter( math.floor(h/2) + 4, "   ||| || |||              ")
-   printCenter( math.floor(h/2) + 5, "   |||_||_|||      ^~^  ,  ")
-   printCenter( math.floor(h/2) + 6, "   ||______||     ('Y') )  ")
-   printCenter( math.floor(h/2) + 7, "  /__________\\    /   \\/   ")
-   printCenter( math.floor(h/2) + 8, "__|__________|__ (\\|||/) __")
+   printCenter( math.floor(h/2) - 2, "    ________                      ")
+   printCenter( math.floor(h/2) - 1, "   / ______ \\    Username:        ")
+   printCenter( math.floor(h/2) + 0, "   || _  _ ||                     ")
+   printCenter( math.floor(h/2) + 1, "   ||| || |||    Password:        ")
+   printCenter( math.floor(h/2) + 2, "   |||_||_|||                     ")
+   printCenter( math.floor(h/2) + 3, "   || _  _o||                     ")
+   printCenter( math.floor(h/2) + 4, "   ||| || |||                     ")
+   printCenter( math.floor(h/2) + 5, "   |||_||_|||      ^~^  ,         ")
+   printCenter( math.floor(h/2) + 6, "   ||______||     ('Y') )         ")
+   printCenter( math.floor(h/2) + 7, "  /__________\\    /   \\/          ")
+   printCenter( math.floor(h/2) + 8, "__|__________|__ (\\|||/) __       ")
    printCenter( math.floor(h/2) + 9, "")
    printCenter( math.floor(h/2) + 10, "")
 end
@@ -63,24 +64,31 @@ drawFrontend()
 
 while true do
     local e,p = os.pullEvent()
-        if e == "key" then
-            local key = p
-            if key == keys.w or key == keys.up then
-                if nOption > 1 then 
-                    nOption = nOption - 1
-                    drawMenuGraphics()
-                    drawFrontend()
-                end
-            elseif key == keys.s or key == keys.down then
-                if nOption < 3 then
-                    nOption  = nOption + 1
-                    drawMenuGraphics()
-                    drawFrontend()
-                end
-        elseif key == keys.enter then
-            break
-        end
-    end
+    if e == "key" then
+        local key = p
+        if nOption == 1 then
+			term.setCursorPos()
+			desiredUsername = read()
+			if desiredUsername != "" && key == keys.enter then
+				nOption = 2
+			end
+		end
+		if nOption == 2 then
+			term.setCursorPos()
+			desiredPassword = read()
+		end
+	end
+end
+
+while true do
+	local e,p = os.pullEvent()
+	if nOption == 1 then
+		term.setCursorPos()
+		desiredUsername = read()
+		if desiredUsername != "" && key == keys.enter then
+			
+		end
+	end
 end
 term.clear()
 
@@ -100,8 +108,4 @@ term.setBackgroundColor(colors.black)
 	print("Rebooting Doors")
 	sleep(1)
 	os.reboot()
-elseif nOption == 3 then
-	term.setBackgroundColor(colors.black)
-	term.setTextColor(colors.white)
-    shell.run("DDE/.start")
 end
