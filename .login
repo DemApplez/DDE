@@ -69,13 +69,16 @@ while true do
         if nOption == 1 then
 			term.setCursorPos()
 			desiredUsername = read()
-			if desiredUsername != "" && key == keys.enter then
+			if key == keys.enter then
 				nOption = 2
 			end
 		end
 		if nOption == 2 then
 			term.setCursorPos()
 			desiredPassword = read()
+			if key == keys.enter then
+				nOption = 3
+			end
 		end
 	end
 end
