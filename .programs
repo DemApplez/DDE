@@ -26,7 +26,7 @@ local function drawMenuGraphics()
     if nOption == 1 then
      term.write("         Paint")
     elseif nOption == 2 then
-     term.write("      TextEdit")
+     term.write("   Text Editor")
     elseif nOption == 3 then
      term.write("     Messaging")
     elseif nOption == 4 then
@@ -51,7 +51,7 @@ local function drawFrontend()
    printCenter( math.floor(h/2) - 2, "Programs List" )
    printCenter( math.floor(h/2) - 1, "")
    printCenter( math.floor(h/2) + 0, ((nOption == 1) and ">>Paint<<") or "Paint" )
-   printCenter( math.floor(h/2) + 1, ((nOption == 2) and ">>TextEdit<<") or "TextEdit" )
+   printCenter( math.floor(h/2) + 1, ((nOption == 2) and ">>Text Editor<<") or "Text Editor" )
    printCenter( math.floor(h/2) + 2, ((nOption == 3) and ">>Messaging<<") or "Messaging" )
    printCenter( math.floor(h/2) + 3, ((nOption == 4) and ">>Worm<<") or "Worm" )
    printCenter( math.floor(h/2) + 4, ((nOption == 5) and ">>Adventure<<") or "Adventure" )
@@ -98,7 +98,7 @@ elseif nOption == 2 then
 	term.setTextColor(colors.white)
 	term.clear()
 	term.setCursorPos(1,1)
-	print("When Your Finished, Type BACK To Return To Main Menu")
+	print("When You're Finished, Exit With CTRL And Type BACK To Return To Main Menu")
 	sleep(3)
     shell.run("edit NewDocument")
 elseif nOption == 3 then
@@ -110,7 +110,7 @@ elseif nOption == 4 then
 	term.setTextColor(colors.white)
 	term.clear()
 	term.setCursorPos(1,1)
-	print("When Your Finished, Type BACK To Return To Main Menu")
+	print("When You're Finished, Type BACK To Return To Main Menu")
 	sleep(3)
     shell.run("worm")
 elseif nOption == 5 then
@@ -118,7 +118,7 @@ elseif nOption == 5 then
 	term.setTextColor(colors.white)
 	term.clear()
 	term.setCursorPos(1,1)
-	print("When Your Finished, Type Exit And Then Type BACK To Return To Main Menu")
+	print("When You're Finished, Type Exit, Then BACK To Return To Main Menu")
 	sleep(3.5)
 	term.clear()
 	term.setCursorPos(1,1)
