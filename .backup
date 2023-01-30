@@ -147,7 +147,6 @@ elseif nOption == 2 then
 		if fs.exists("appdata") then
 			beginCopy("appdata", "disk/.backup/appdata")
 		end
-		beginCopy("appdata", "disk/.backup/appdata")
 		beginCopy("BACK", "disk/.backup/BACK")
 		print("")
 		print("Completed Backup Operation, Returning To Doors")

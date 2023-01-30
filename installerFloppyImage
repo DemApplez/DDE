@@ -1,0 +1,93 @@
+term.clear()
+ 
+term.setCursorPos(1,1)
+ 
+print("Beginning Download Of")
+sleep(0.5)
+print("")
+print("DDE Version 0.4")
+print("")
+ 
+sleep(0.5)
+ 
+function dlComplete(name)
+	write(name)
+	print(" File Moved Successfully")
+end
+
+function checkIfFileExists(name)
+	if fs.exists
+end
+
+dlComplete(".start")
+
+dlComplete(".startupLogo")
+
+dlComplete(".shutdown")
+ 
+dlComplete(".command")
+
+dlComplete("autorun")
+
+dlComplete("BACK")
+
+dlComplete(".uninstall")
+
+dlComplete(".receiveGlobal")
+
+dlComplete(".backup")
+
+dlComplete(".updateChecker")
+
+dlComplete(".deleteos")
+
+dlComplete(".options")
+
+dlComplete(".programs")
+
+dlComplete(".restore")
+
+dlComplete(".sendPrivate")
+
+dlComplete(".sendGlobal")
+
+dlComplete(".globalChoose")
+ 
+dlComplete(".messaging")
+
+dlComplete(".messagingLoading")
+
+dlComplete(".login")
+ 
+
+fs.move("autorun","startup/autorun")
+fs.move(".start","DDE/.start")
+fs.move(".startupLogo","DDE/.startupLogo")
+fs.move(".shutdown","DDE/.shutdown")
+fs.move(".command","DDE/.command")
+fs.move(".uninstall","DDE/.uninstall")
+fs.move(".receiveGlobal","programs/.receiveGlobal")
+fs.move(".backup","DDE/.backup")
+fs.move(".updateChecker","DDE/.updateChecker")
+fs.move(".deleteos","DDE/.deleteos")
+fs.move(".options","DDE/.options")
+fs.move(".programs","DDE/.programs")
+fs.move(".restore","DDE/.restore")
+fs.move(".sendPrivate","programs/.sendPrivate")
+fs.move(".sendGlobal","programs/.sendGlobal")
+fs.move(".globalChoose","programs/.globalChoose")
+fs.move(".messaging","programs/.messaging")
+fs.move(".messagingLoading","programs/.messagingLoading")
+ 
+sleep(0.5)
+ 
+print("")
+print("Setup Complete, Thanks For Installing")
+sleep(0.5)
+print("")
+print("WARNING: Some Features Are Still Not Present")
+print("Example: Private Messaging In Messaging App")
+sleep(2)
+ 
+fs.delete("installer")
+os.reboot()
