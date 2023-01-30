@@ -84,10 +84,17 @@ local loginStep = 1
 if nOption == 3 then
 	local userfile1 = fs.open(".loginInformation/.username", "w")
 	local userfile2 = fs.open(".loginInformation/.password", "w")
-	userfile1.write(desiredUsername)
-    userfile1.close()
-	userfile2.write(desiredUsername)
-    userfile2.close()
+	local readUserfile1 = userfile1.readAll()
+	local readUserfile2 = userfile1.readAll()
+	if desiredUsername == readUserfile1 then
+		if desiredPassword == readUserfile2 then
+			
+		end
+	else
+		
+	end
+    	userfile1.close()
+    	userfile2.close()
 end
 
 term.clear()
