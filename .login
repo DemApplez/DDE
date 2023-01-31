@@ -5,10 +5,10 @@ local w,h = term.getSize()
 --Print On Center Function
 
 function printCenter(y,s)
-	local x = math.floor((w - string.len(s)) /2)
-	term.setCursorPos(x,y)
-	term.clearLine()
-	term.write(s)
+    local x = math.floor(((w - string.len(s)) /2) + 1)
+    term.setCursorPos(x,y)
+    term.clearLine()
+    term.write(s)
 end
 
 --Draws Menu Function

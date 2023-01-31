@@ -43,4 +43,27 @@ end
 
 sleep(0.2)
 
-shell.run("DDE/.startupLogo")
+if fs.exists(".loginInformation/.username") then
+	if fs.exists(".loginInformation/.password") then
+		shell.run("DDE/.login")
+	end
+else
+	term.setCursorPos(3,7)
+	write("Beginning First Time Setup")
+	
+	for anim=0,7 do
+		term.setCursorPos(1,7)
+		write("|")
+		sleep(0.1)
+		term.setCursorPos(1,7)
+		write("/")
+		sleep(0.1)
+		term.setCursorPos(1,7)
+		write("-")
+		sleep(0.1)
+		term.setCursorPos(1,7)
+		write("\\")
+		sleep(0.1)
+	end
+	shell.run("DDE/.setup")
+end

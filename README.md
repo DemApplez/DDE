@@ -5,4 +5,4 @@ This Github Page for Doors (DDE's Nickname) Comes with everything you'd need to 
 
 Doors is built and styled the way it is to represent older Operating Systems from the 90s and earlier, more specifically Windows 3.1 and MS-DOS Version 6. Currently the project is in its early stages and only has a limited amount of functionality. Most stuff included is functional, but can have major bugs and/or can break at any moment.
 
-Current Version: DDE Version 0.4
+Current Version: DDE Version 0.5
