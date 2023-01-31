@@ -1,7 +1,7 @@
 term.setCursorPos(1,1)
 term.clear()
 rednet.open("right")
-print("Welcome To Your DDE Messaging Server. On This Display, There Will Be Words Printed Whenever A Message Is Stored And/Or Sent To Someone.")
+print("Welcome To Your DDE Multi-Purpose Server. On This Display, There Will Be Words Printed Whenever A Message Is Stored And/Or Sent To Someone.")
 sleep(3)
 print("Checking If usernames Folder Exists...")
 sleep(1)
@@ -22,6 +22,27 @@ else
 	print("Creating ids Folder...")
 	fs.makeDir("ids")
 	print("ids Folder Created")
+end
+print("Checking If productKeysValid Folder Exists...")
+sleep(1)
+if fs.exists("productKeysValid") then
+	print("productKeysValid Folder Exists, Continuing Startup...")
+else
+	print("productKeysValid Folder Does Not Exist!")
+	print("Creating productKeysValid Folder...")
+	fs.makeDir("productKeysValid")
+	print("productKeysValid Folder Created")
+end
+sleep(1)
+print("Checking If productKeysInvalid Folder Exists...")
+sleep(1)
+if fs.exists("productKeysInvalid") then
+	print("productKeysInvalid Folder Exists, Continuing Startup...")
+else
+	print("productKeysInvalid Folder Does Not Exist!")
+	print("Creating productKeysInvalid Folder...")
+	fs.makeDir("productKeysInvalid")
+	print("productKeysInvalid Folder Created")
 end
 sleep(1)
 print("Beginning Normal Server Protocols")
@@ -103,15 +124,38 @@ while true do
 	--If MessageType = 5 Then Reset ID For Account
 	if messageType == "5" then
 		print("Computer#" .. id .. " Wants To Reset ID For Account: " .. message[1])
-		print("resetting")
+		print("Resetting")
 		fs.delete("ids/" .. message[1])
 		userfile = fs.open("ids/" .. message[1], "w")
 		userfile.write(id)
 		userfile.close()
 	end
 	
-	--If MessageType = 6 Then Kill Server
-	if messageType == "6" then
-		shell.run("back")
+	--If MessageType == 6 Then Begin Activation Methods
+	if MessageType == "6" then
+		print("Computer#" .. id .. " Wants To Begin Activation With PK " .. message[1])
+		print("Attempting To Use Product Key")
+		if fs.exists("productKeysValid/" .. message[1]) then
+			if fs.exists("productKeysInvalid/" .. message[1]) then
+				print("Product Key Blacklisted, Cannot Be Used For Activation")
+				rednet.send(id, "PRODUCT KEY INVALIDATED")
+			end
+		else
+			local productKeyChecker = fs.open("productKeysValid/" .. message[1])
+			local ownerOfKey = productKeyChecker.readAll()
+			if ownerOfKey == "" then
+				print("Product Key Un-Activated, Writing Computer ID To Product Key File " .. message[1])
+				productKeyChecker.write(id)
+				rednet.send(id, "PRODUCT KEY VALID")
+				print("Product Key Now Attached To Computer With ID#" .. id)
+				productKeyChecker.close()
+				ownerOfKey.close()
+			else
+				print("Product Key Already Activated, Denying Activation")
+				rednet.send(id, "KEY ALREADY USED")
+				productKeyChecker.close()
+				ownerOfKey.close()
+			end
+		end
 	end
 end
