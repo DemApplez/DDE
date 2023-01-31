@@ -1,0 +1,276 @@
+os.pullEvent = os.pullEventRaw
+ 
+local w,h = term.getSize()
+ 
+--Print On Center Function
+ 
+function printCenter(y,s)
+    local x = math.floor(((w - string.len(s)) /2) + 1)
+    term.setCursorPos(x,y)
+    term.clearLine()
+    term.write(s)
+end
+ 
+function clearScreen()
+    term.setCursorPos(1,1)
+    print("                                                                                                ")
+    print("                                                                                                ")
+    print("                                                                                                ")
+    print("                                                                                                ")
+    print("                                                                                                ")
+    print("                                                                                                ")
+    print("                                                                                                ")
+    print("                                                                                                ")
+    print("                                                                                                ")
+    print("                                                                                                ")
+    print("                                                                                                ")
+    print("                                                                                                ")
+    print("                                                                                                ")
+    print("                                                                                                ")
+    print("                                                                                                ")
+    print("                                                                                                ")
+    print("                                                                                                ")
+    print("                                                                                                ")
+    print("                                                                                                ")
+    print("                                                                                                ")
+    term.setCursorPos(1,1)
+end
+ 
+term.setTextColor(colors.black)
+term.setBackgroundColor(colors.white)
+clearScreen()
+    
+local nOption = 1
+local retries = 0
+local stringy = ""
+term.setPaletteColor(colors.blue, 0x0000ff)
+local function drawMenuGraphics()
+    term.setBackgroundColor(colors.blue)
+    term.setTextColor(colors.white)
+    term.clear()
+    term.setCursorPos(1,1)
+    term.write("DDE First Time Setup Wizard")
+end
+ 
+term.clear()
+local function drawFrontend()
+    term.setTextColor(colors.black)
+    term.setBackgroundColor(colors.white)
+    printCenter( math.floor(h/2) - 7, "")
+    printCenter( math.floor(h/2) - 6, "")
+    printCenter( math.floor(h/2) - 5, "Welcome To Doors Desktop Environment")
+    printCenter( math.floor(h/2) - 4, "")
+    printCenter( math.floor(h/2) - 3, "Would You Like To Enter A Product Key?")
+    printCenter( math.floor(h/2) - 2, "(Choosing No Will Result In Less Features)")
+    printCenter( math.floor(h/2) - 1, "")
+    printCenter( math.floor(h/2) + 0, ((nOption == 1) and ">>Enter Product Key<<") or "Enter Product Key" )
+    printCenter( math.floor(h/2) + 1, ((nOption == 2) and ">>Skip For Now<<") or "Skip For Now" )
+    printCenter( math.floor(h/2) + 2, "")
+    printCenter( math.floor(h/2) + 3, "")
+    printCenter( math.floor(h/2) + 4, "")
+    printCenter( math.floor(h/2) + 5, "")
+    printCenter( math.floor(h/2) + 6, "")
+    printCenter( math.floor(h/2) + 7, "")
+    printCenter( math.floor(h/2) + 8, "")
+    printCenter( math.floor(h/2) + 9, "")
+    printCenter( math.floor(h/2) + 10, "")
+end
+ 
+drawMenuGraphics()
+drawFrontend()
+ 
+while true do
+    local e,p = os.pullEvent()
+        if e == "key" then
+            local key = p
+            if key == keys.w or key == keys.up then
+                if nOption > 1 then 
+                    nOption = nOption - 1
+                    drawMenuGraphics()
+                    drawFrontend()
+                end
+            elseif key == keys.s or key == keys.down then
+                if nOption < 2 then
+                    nOption  = nOption + 1
+                    drawMenuGraphics()
+                    drawFrontend()
+                end
+        elseif key == keys.enter then
+            break
+        end
+    end
+end
+term.clear()
+    
+if nOption == 2 then    
+    printCenter( math.floor(h/2) + 0, "           ")
+    term.setCursorPos(1,1)
+    print("Hello, And Welcome To The Messaging App!")
+    sleep(2)
+    print("Because This Is Your First Time Using It, You'll Need To Know A Few Things")
+    sleep(3)
+    print("Before Continuing, Make Sure Your Wireless Modem Is Connected To The Right Side Of Your Computer. It Is Also Required To Have 2 Computers. One For Receiving Data And One For Sending Data Stacked On Top Of Each Other")
+    sleep(5)
+    print("We Also Require The Messaging Server's ID Before Continuing")
+    sleep(4)
+    clearScreen()
+    write("Please Enter Server ID: ")
+    serverID = tonumber(read())
+    print("")
+    print("Great! We Will Now Attempt To Connect To The Server")
+    print("If You See An Error That Stops The Script, Type BACK And Retry")
+    sleep(2)
+    print("")
+    print("Connecting To Server...")
+    sleep(1)
+    rednet.open("right")
+    senderID = tostring(os.computerID())
+    rednet.send(serverID, "TESTING CONNECTION", "2")
+    retries = 0
+    while retries < 4 do
+        stringy = "blank"
+        id, stringy = rednet.receive(5)
+        if stringy == "RESPONSE GOOD" then
+            retries = 4
+        else
+            print("Incorrect Response, Retrying...")
+            retries = retries + 1
+        end
+    end
+    if stringy == "RESPONSE GOOD" then
+        serverIDSaver = fs.open("appdata/.messagingServerID", "w")
+        serverIDSaver.write(serverID)
+        serverIDSaver.close()
+        print("Connection Established!")
+        sleep(1)
+        print("We Will Now Begin By Setting Up An Account")
+        sleep(2)
+        clearScreen()
+        completed = 0
+        while completed == 0 do
+            write("Please Enter In Your Desired Username (Char Limit = 15): ")
+            desiredUsername = read()
+            if #desiredUsername < 15 and #desiredUsername > 0 then
+                write("Now, Type In Desired Password: ")
+                desiredPassword = read()
+                if #desiredPassword < 15 and #desiredPassword > 0 then
+                    print("Attempting To Send Username And Password To Server...")
+                    local login = {desiredUsername, desiredPassword}
+                    rednet.send(serverID, login, "3")
+                    retries = 0
+                    while retries < 4 do
+                        stringy = "blank"
+                        id, stringy = rednet.receive(5)
+                        if stringy == "SIGNUP COMPLETE" then
+       retries = 5
+                            print("Congrats! Signup Successful")
+                            sleep(2)
+                            print("Rebooting OS")
+       sleep(1)
+                            local userfile = fs.open("appdata/.messagingFirstTimeBoot", "w")
+                            userfile.write(desiredUsername)
+                            userfile.close()
+                            os.reboot()
+                        elseif stringy == "USERNAME EXISTS" then
+                            print("Username Exists Already, Retrying...")
+                            break
+                        else
+                            print("Incorrect Response, Retrying...")
+                            retries = retries + 1
+                            if retries == 4 then
+                                print("Too Much Traffic Or Server Is Down, Try Again Later.")
+                                sleep(3)
+                            end
+                        end
+                    end
+                else
+                    print("Password Isn't Compatible (Do You Have Too Many Characters?)")
+                end
+            else
+                print("Username Isn't Compatible (Do You Have Too Many Characters?)")
+            end
+        end
+    else
+        print("To Much Traffic Or Server Is Down, Try Again Later.")
+        sleep(3)
+    end
+    else
+    clearScreen()
+        write("Please Enter Server ID: ")
+        serverID = tonumber(read())
+        print("")
+        print("Great! We Will Now Attempt To Connect To The Server")
+        print("If You See An Error That Stops The Script, Type BACK And Retry")
+        sleep(2)
+        print("")
+        print("Connecting To Server...")
+        sleep(1)
+        rednet.open("right")
+        senderID = tostring(os.computerID())
+        rednet.send(serverID, "TESTING CONNECTION", "2")
+        retries = 0
+        serverIDSaver = fs.open("appdata/.messagingServerID", "w")
+        serverIDSaver.write(serverID)
+        serverIDSaver.close()
+        while retries < 4 do
+            stringy = "blank"
+            id, stringy = rednet.receive(5)
+            if stringy == "RESPONSE GOOD" then
+                break
+            else
+                print("Incorrect Response, Retrying...")
+                retries = retries + 1
+            end
+        end
+        if stringy == "RESPONSE GOOD" then
+            print("Connection Established!")
+            sleep(2)
+            clearScreen()
+            completed = 0
+            while completed == 0 do
+                write("Please Enter Username: ")
+                desiredUsername = read()
+                if #desiredUsername < 15 and #desiredUsername > 0 then
+                    write("Please Enter Password: ")
+                    desiredPassword = read()
+                    if #desiredPassword < 15 and #desiredPassword > 0 then
+                        print("Logging In...")
+                        local login = {desiredUsername, desiredPassword}
+                        rednet.send(serverID, login, "4")
+                        retries = 0
+                        while retries < 4 do
+                            stringy = "blank"
+                            id, stringy = rednet.receive(5)
+                            if stringy == "LOGIN SUCCESSFUL" then
+                                print("Signed In!")
+                                sleep(1)
+                                print("Rebooting OS...")
+        sleep(1)
+                                userfile = fs.open("appdata/.messagingFirstTimeBoot", "w")
+                                userfile.write(desiredUsername)
+                                userfile.close()
+                                os.reboot()
+                            elseif stringy == "LOGIN FAILED" then
+                                print("Login Failed")
+                                break
+                            else
+                                print("Incorrect Response, Retrying...")
+                                retries = retries + 1
+                                if retries == 4 then
+                                    print("To Much Traffic Or Server Is Down, Try Again Later.")
+                                    sleep(3)
+                                end
+                            end
+                        end
+                    else
+                    print("Password Isn't Compatible (Do You Have Too Many Characters?)")
+                end
+            else
+                print("Username Isn't Compatible (Do You Have Too Many Characters?)")
+            end
+        end
+        else
+            print("To Much Traffic Or Server Is Down, Try Again Later.")
+            sleep(3)
+        end
+    end
