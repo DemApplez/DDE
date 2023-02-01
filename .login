@@ -64,7 +64,7 @@ drawFrontend()
 
 while true do
    if nOption == 1 then
-		term.setCursorPos(34, 8)
+		term.setCursorPos(35, 8)
 		desiredUsername = read()
 		nOption = 2
 		break
@@ -72,7 +72,7 @@ while true do
 end
 while true do
 	if nOption == 2 then
-		term.setCursorPos(34, 10)
+		term.setCursorPos(35, 10)
 		desiredPassword = read()
 		nOption = 3
 		break
