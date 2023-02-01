@@ -84,12 +84,8 @@ local loginStep = 1
 if nOption == 3 then
 	local userfile1 = fs.open(".loginInformation/.username", "r")
 	local userfile2 = fs.open(".loginInformation/.password", "r")
-	print(userfile1)
-    	print(userfile2)
 	local readUserfile1 = userfile1.readAll()
 	local readUserfile2 = userfile1.readAll()
-    	print(readUserfile1)
-    	print(readUserfile2)
 	if desiredUsername == readUserfile1 then
 		if desiredPassword == readUserfile2 then
 			term.setCursorPos(26, 10)
@@ -100,10 +96,10 @@ if nOption == 3 then
 			shell.run("DDE/.start")
 		end
 	else
-		term.setCursorPos(26, 10)
+		term.setCursorPos(26, 11)
 		write("Logging In...")
 		sleep(1.75)
-		term.setCursorPos(26, 11)
+		term.setCursorPos(26, 12)
 		write("Login Failed, Try Again")
 		sleep(2)
 		shell.run("DDE/.login")
