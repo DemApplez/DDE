@@ -82,30 +82,33 @@ end
 local loginStep = 1
 
 if nOption == 3 then
-	local userfile1 = fs.open(".loginInformation/.username", "r")
+    local userfile1 = fs.open(".loginInformation/.username", "r")
 	local userfile2 = fs.open(".loginInformation/.password", "r")
 	local readUserfile1 = userfile1.readAll()
-	local readUserfile2 = userfile1.readAll()
-	if desiredUsername == readUserfile1 then
-		if desiredPassword == readUserfile2 then
-			term.setCursorPos(26, 10)
-			write("Logging In...")
-			sleep(1.75)
-			term.clear()
-			term.setCursorPos(1,1)
-			shell.run("DDE/.start")
-		end
-	else
-		term.setCursorPos(26, 11)
-		write("Logging In...")
-		sleep(1.75)
-		term.setCursorPos(26, 12)
-		write("Login Failed, Try Again")
-		sleep(2)
-		shell.run("DDE/.login")
-	end
-    	userfile1.close()
-    	userfile2.close()
+	local readUserfile2 = userfile2.readAll()
+    if loginStep == 1 then
+	    if desiredUsername == readUserfile1 and desiredPassword == readUserfile2 then
+		    term.setCursorPos(26, 11)
+		    write("Logging In...")
+		    sleep(1.75)
+		    term.setCursorPos(26, 12)
+		    write("Success!")
+		    sleep(2)
+		    term.clear()
+		    term.setCursorPos(1,1)
+		    shell.run("DDE/.start")
+	    else
+		    term.setCursorPos(26, 11)
+		    write("Logging In...")
+		    sleep(1.75)
+		    term.setCursorPos(26, 12)
+		    write("Login Failed, Try Again")
+		    sleep(2)
+		    shell.run("DDE/.login")
+	    end
+    	    userfile1.close()
+    	    userfile2.close()
+    end
 end
 
 term.clear()
