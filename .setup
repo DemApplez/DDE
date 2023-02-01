@@ -101,7 +101,30 @@ while true do
     end
 end
 term.clear()
-    
+
+if nOption == 1 then
+    clearScreen()
+    setCursorPos(1,2)
+    write("(This Should've Been Included With Your Product Key Booklet)")
+    setCursorPos(1,1)
+    write("Please Enter Activation Server ID: ")
+    serverID = tonumber(read())
+    print("")
+    print("Attempting Connection To Activation Server...")
+    print("If You See An Error That Stops The Script, Type BACK And Retry")
+    sleep(2)
+    print("")
+    print("Connecting To Server...")
+    sleep(1)
+    peripheral.find("modem", rednet.open)
+    senderID = tostring(os.computerID())
+    rednet.send(serverID, "TESTING CONNECTION", "2")
+    retries = 0
+    serverIDSaver = fs.open("appdata/.serverID", "w")
+    serverIDSaver.write(serverID)
+    serverIDSaver.close()
+end
+
 if nOption == 2 then    
     printCenter( math.floor(h/2) + 0, "           ")
     term.setCursorPos(1,1)
@@ -162,11 +185,11 @@ if nOption == 2 then
                         stringy = "blank"
                         id, stringy = rednet.receive(5)
                         if stringy == "SIGNUP COMPLETE" then
-       retries = 5
+                        retries = 5
                             print("Congrats! Signup Successful")
                             sleep(2)
                             print("Rebooting OS")
-       sleep(1)
+                            sleep(1)
                             local userfile = fs.open("appdata/.messagingFirstTimeBoot", "w")
                             userfile.write(desiredUsername)
                             userfile.close()
@@ -194,7 +217,7 @@ if nOption == 2 then
         print("To Much Traffic Or Server Is Down, Try Again Later.")
         sleep(3)
     end
-    else
+else
     clearScreen()
         write("Please Enter Server ID: ")
         serverID = tonumber(read())
@@ -245,7 +268,7 @@ if nOption == 2 then
                                 print("Signed In!")
                                 sleep(1)
                                 print("Rebooting OS...")
-        sleep(1)
+                                sleep(1)
                                 userfile = fs.open("appdata/.messagingFirstTimeBoot", "w")
                                 userfile.write(desiredUsername)
                                 userfile.close()
