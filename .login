@@ -73,7 +73,7 @@ end
 while true do
 	if nOption == 2 then
 		term.setCursorPos(35, 10)
-		desiredPassword = read()
+		desiredPassword = read("*")
 		nOption = 3
 		break
 	end
