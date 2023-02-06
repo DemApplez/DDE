@@ -104,9 +104,9 @@ term.clear()
 
 if nOption == 1 then
     clearScreen()
-    setCursorPos(1,2)
-    write("(This Should've Been Included With Your Product Key Booklet)")
-    setCursorPos(1,1)
+    term.setCursorPos(1,2)
+    write("(This Should Be In Your Product Key Booklet)")
+    term.setCursorPos(1,1)
     write("Please Enter Activation Server ID: ")
     serverID = tonumber(read())
     print("")
@@ -125,7 +125,15 @@ if nOption == 1 then
     serverIDSaver.close()
 end
 
-if nOption == 2 then    
+if nOption == 2 then
+    nOption = 3
+end
+
+if nOption == 3 then
+    
+end
+
+if nOption == 55 then    
     printCenter( math.floor(h/2) + 0, "           ")
     term.setCursorPos(1,1)
     print("Hello, And Welcome To The Messaging App!")
