@@ -92,15 +92,13 @@ term.clear()
 if nOption == 1 then
 	term.setBackgroundColor(colors.black)
 	term.setTextColor(colors.white)
-    shell.run("DDE/.programs")
+    term.clear()
+    shell.run("DDE/.paintFileCreator")
 elseif nOption == 2 then
 	term.setBackgroundColor(colors.black)
 	term.setTextColor(colors.white)
 	term.clear()
-	term.setCursorPos(1,1)
-	print("When You're Finished, Exit With CTRL And Type BACK To Return To Main Menu")
-	sleep(3)
-    shell.run("edit NewDocument")
+    shell.run("DDE/.textFileCreator")
 elseif nOption == 3 then
 	term.setBackgroundColor(colors.black)
 	term.setTextColor(colors.white)

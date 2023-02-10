@@ -96,8 +96,13 @@ if nOption == 3 then
 		    sleep(2)
 		    term.clear()
 		    term.setCursorPos(1,1)
+<<<<<<< Updated upstream
 		    term.setBackgroundColor(colors.black)
 		    term.setTextColor(colors.white)
+=======
+            term.setBackgroundColor(colors.black)
+	        term.setTextColor(colors.white)
+>>>>>>> Stashed changes
 		    shell.run("DDE/.start")
 	    else
 		    term.setCursorPos(26, 11)
@@ -106,8 +111,13 @@ if nOption == 3 then
 		    term.setCursorPos(26, 12)
 		    write("Login Failed, Try Again")
 		    sleep(2)
+<<<<<<< Updated upstream
 		    term.setBackgroundColor(colors.black)
 		    term.setTextColor(colors.white)
+=======
+            term.setBackgroundColor(colors.black)
+	        term.setTextColor(colors.white)
+>>>>>>> Stashed changes
 		    shell.run("DDE/.login")
 	    end
     	    userfile1.close()
@@ -116,21 +126,3 @@ if nOption == 3 then
 end
 
 term.clear()
-
-if nOption == 1 then
-term.setBackgroundColor(colors.black)
-	term.setTextColor(colors.white)
-	term.clear()
-	term.setCursorPos(1,1)
-	print("Shutting Down Doors")
-	sleep(1)
-	os.shutdown()
-elseif nOption == 2 then
-term.setBackgroundColor(colors.black)
-	term.setTextColor(colors.white)
-	term.clear()
-	term.setCursorPos(1,1)
-	print("Rebooting Doors")
-	sleep(1)
-	os.reboot()
-end
