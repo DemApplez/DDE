@@ -96,13 +96,10 @@ if nOption == 3 then
 		    sleep(2)
 		    term.clear()
 		    term.setCursorPos(1,1)
-<<<<<<< Updated upstream
 		    term.setBackgroundColor(colors.black)
 		    term.setTextColor(colors.white)
-=======
-            term.setBackgroundColor(colors.black)
-	        term.setTextColor(colors.white)
->>>>>>> Stashed changes
+		    term.setBackgroundColor(colors.black)
+		    term.setTextColor(colors.white)
 		    shell.run("DDE/.start")
 	    else
 		    term.setCursorPos(26, 11)
@@ -111,13 +108,10 @@ if nOption == 3 then
 		    term.setCursorPos(26, 12)
 		    write("Login Failed, Try Again")
 		    sleep(2)
-<<<<<<< Updated upstream
 		    term.setBackgroundColor(colors.black)
 		    term.setTextColor(colors.white)
-=======
-            term.setBackgroundColor(colors.black)
-	        term.setTextColor(colors.white)
->>>>>>> Stashed changes
+		    term.setBackgroundColor(colors.black)
+		    term.setTextColor(colors.white)
 		    shell.run("DDE/.login")
 	    end
     	    userfile1.close()
