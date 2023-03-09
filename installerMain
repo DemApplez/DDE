@@ -193,6 +193,15 @@ f.close()
 r.close()
  
 dlComplete(".login")
+
+
+local r = http.get("https://raw.githubusercontent.com/DemApplez/DDE/main/.version")
+local f = fs.open(shell.resolve(".version"),"w")
+f.write(r.readAll())
+f.close()
+r.close()
+ 
+dlComplete(".version")
  
 
 fs.move("autorun","startup/autorun")
@@ -214,6 +223,7 @@ fs.move(".globalChoose","programs/.globalChoose")
 fs.move(".messaging","programs/.messaging")
 fs.move(".messagingLoading","programs/.messagingLoading")
 fs.move(".login","DDE/.login")
+fs.move(".start","DDE/.version")
  
 sleep(0.5)
  
