@@ -75,7 +75,7 @@ if fs.exists(".loginInformation/.username") then
         sleep(0.1)
 		
         term.setCursorPos(1,18)
-		term.write("Development Build Version ")
+		term.write(" Development Build Version ")
 		term.write(versionNumber)
 
         sleep(2)
