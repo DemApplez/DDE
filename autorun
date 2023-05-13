@@ -1,5 +1,8 @@
 os.pullEvent = os.pullEventRaw
 
+local versionNumberReadFile = fs.open("DDE/.version", "r")
+local versionNumber = versionNumberReadFile.readAll()
+
 term.clear()
 
 term.setCursorPos(3,1)
@@ -70,10 +73,10 @@ if fs.exists(".loginInformation/.username") then
         sleep(0.1)
         
         sleep(0.1)
-
+		
         term.setCursorPos(1,18)
-
-        term.write(" Development Build Version 0.5")
+		term.write("Development Build Version ")
+		term.write(versionNumber)
 
         sleep(2)
         
