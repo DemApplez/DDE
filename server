@@ -73,8 +73,8 @@ while true do
 	if messageType == "2" then
 		write("User On Computer#")
 		write(tostring(id))
-		print(" Wants To Begin Sign Up Process")
-		print("Beginning Sign Up Process")
+		print(" Wants To Test The Server Connection")
+		print("Sending Response")
 		rednet.send(id, "RESPONSE GOOD")
 	end
 	
@@ -123,39 +123,40 @@ while true do
 	
 	--If MessageType = 5 Then Reset ID For Account
 	if messageType == "5" then
-		print("Computer#" .. id .. " Wants To Reset ID For Account: " .. message[1])
+		print("Computer#" .. id .. " Wants To Reset ID For Account: " .. message)
 		print("Resetting")
-		fs.delete("ids/" .. message[1])
-		userfile = fs.open("ids/" .. message[1], "w")
+		fs.delete("ids/" .. message)
+		userfile = fs.open("ids/" .. message, "w")
 		userfile.write(id)
 		userfile.close()
 	end
 	
-	--If MessageType == 6 Then Begin Activation Methods
-	if MessageType == "6" then
-		print("Computer#" .. id .. " Wants To Begin Activation With PK " .. message[1])
+	--If MessageType = 6 Then Begin Activation Methods
+	if messageType == "6" then
+		print("Computer#" .. id .. " Wants To Begin Activation With PK: " .. message)
 		print("Attempting To Use Product Key")
-		if fs.exists("productKeysValid/" .. message[1]) then
-			if fs.exists("productKeysInvalid/" .. message[1]) then
+		if fs.exists("productKeysValid/" .. message) == true then
+			if fs.exists("productKeysInvalid/" .. message) == true then
 				print("Product Key Blacklisted, Cannot Be Used For Activation")
-				rednet.send(id, "PRODUCT KEY INVALIDATED")
+				rednet.send(id, "PRODUCT KEY INVALID")
+			else
+				local productKeyChecker = fs.open("productKeysValid/" .. message, "r")
+				local ownerOfKey = productKeyChecker.readAll()
+				productKeyChecker.close()
+				local productKeyChecker = fs.open("productKeysValid/" .. message, "w")
+				if ownerOfKey == "" then
+					print("Product Key Un-Activated, Writing Computer ID To Product Key File " .. message)
+					productKeyChecker.write(id)
+					rednet.send(id, "PRODUCT KEY VALID")
+					print("Product Key Now Attached To Computer With ID#" .. id)
+				else
+					print("Product Key Already Activated, Denying Activation")
+					rednet.send(id, "KEY ALREADY USED")
+				end
 			end
 		else
-			local productKeyChecker = fs.open("productKeysValid/" .. message[1])
-			local ownerOfKey = productKeyChecker.readAll()
-			if ownerOfKey == "" then
-				print("Product Key Un-Activated, Writing Computer ID To Product Key File " .. message[1])
-				productKeyChecker.write(id)
-				rednet.send(id, "PRODUCT KEY VALID")
-				print("Product Key Now Attached To Computer With ID#" .. id)
-				productKeyChecker.close()
-				ownerOfKey.close()
-			else
-				print("Product Key Already Activated, Denying Activation")
-				rednet.send(id, "KEY ALREADY USED")
-				productKeyChecker.close()
-				ownerOfKey.close()
-			end
+			print("Product Key Doesn't Exist, Activation Denied")
+			rednet.send(id, "PRODUCT KEY INVALID")
 		end
 	end
 end
