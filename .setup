@@ -206,5 +206,32 @@ if setupStep == 2 then
 end
 
 if setupStep == 3 then
-    
+    term.clear()
+	term.setBackgroundColor(colors.white)
+    term.setTextColor(colors.black)
+    term.setCursorPos(1,1)
+    term.write("DDE First Time Setup Wizard                                                                     ")
+	term.setTextColor(colors.white)
+	term.setBackgroundColor(colors.blue)
+    term.setCursorPos(1,2)
+    write("Please Enter Your New Username")
+    term.setCursorPos(1,3)
+    write("Username: ")
+    desiredUsername = tonumber(read())
+	term.setCursorPos(1,5)
+    write("Now Please Enter In Your New Password")
+    term.setCursorPos(1,6)
+    write("Password: ")
+    desiredPassword = tonumber(read())
+	loginSaver = fs.open(".loginInformation/.username", "w")
+	loginSaver.write(desiredUsername)
+	loginSaver = fs.open(".loginInformation/.password", "w")
+	loginSaver.write(desiredPassword)
+    loginSaver.close()
+	term.setCursorPos(1,8)
+	print("Congrats! Setup Is Now Complete")
+	sleep(1.5)
+	print("Setup Will Now Restart Your Computer")
+	sleep(3)
+	os.reboot()
 end
