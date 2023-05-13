@@ -118,5 +118,3 @@ if nOption == 3 then
     	    userfile2.close()
     end
 end
-
-term.clear()
