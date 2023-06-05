@@ -1,0 +1,37 @@
+local printer = peripheral.wrap("top")
+local pageToWrite = printer.newPage()
+
+keyStep1 = tostring(math.random(1,9))
+keyStep2 = tostring(math.random(1,9))
+keyStep3 = tostring(math.random(5,7))
+keyStep4 = tostring(math.random(1,2))
+
+key2Step1 = tostring(math.random(1,9))
+key2Step2 = tostring(math.random(1,9))
+key2Step3 = "7"
+key2Step4 = tostring(math.random(1,5))
+ key2Step5 = tostring(math.random(6,9))
+key2Step6 = tostring(math.random(2,5))
+key2Step7 = "1"
+
+keyPart1 = keyStep1 .. keyStep2 .. keyStep3 .. keyStep4
+keyPart2 = key2Step1 .. key2Step2 .. key2Step3 .. key2Step4 .. key2Step5 .. key2Step6 .. key2Step7
+local fullProductKeyCreated = tostring(keyPart1) .. "-DDEK-" .. tostring(keyPart2)
+print("Key Generated On Command: " .. fullProductKeyCreated)
+
+printer.write("~~~~~~~~~~~~~~~~~~~~~~~~~")
+printer.setCursorPos(1,3)
+printer.write("Doors Desktop Environment")
+printer.setCursorPos(1,4)
+printer.write("Certificate Of Ownership")
+printer.setCursorPos(1,6)
+printer.write("Your Product Key Is... ")
+printer.setCursorPos(1,7)
+printer.write(fullProductKeyCreated)
+printer.setCursorPos(1,21)
+printer.write("~~~~~~~~~~~~~~~~~~~~~~~~~")
+printer.endPage()
+
+local r = fs.open("productKeysValid/" .. fullProductKeyCreated, "w")
+r.write("")
+r.close()

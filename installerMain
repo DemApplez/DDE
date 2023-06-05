@@ -5,7 +5,7 @@ term.setCursorPos(1,1)
 print("Beginning Download Of")
 sleep(0.5)
 print("")
-print("DDE Version 0.5")
+print("Doors Desktop Environment")
 print("")
  
 sleep(0.5)
